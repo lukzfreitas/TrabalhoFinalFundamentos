@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import negocio.CadastroUsuarioPFDAO;
+import negocio.CadastroUsuarioPJDAO;
 import negocio.Usuario;
 import negocio.UsuarioPF;
 import negocio.UsuarioPJ;
@@ -22,18 +23,18 @@ import negocio.UsuarioPJ;
  *
  * @author Lucas
  */
-public class UsuarioPFDAOJavaDb implements CadastroUsuarioPFDAO{
+public class UsuarioPJDAOJavaDb implements CadastroUsuarioPJDAO {
 
-    private static UsuarioPFDAOJavaDb ref;
+    private static UsuarioPJDAOJavaDb ref;
 
-    public static UsuarioPFDAOJavaDb getInstance() throws DAOException{
+    public static UsuarioPJDAOJavaDb getInstance() throws DAOException {
         if (ref == null) {
-            ref = new UsuarioPFDAOJavaDb();
+            ref = new UsuarioPJDAOJavaDb();
         }
         return ref;
     }
 
-    private UsuarioPFDAOJavaDb() {
+    private UsuarioPJDAOJavaDb() {
         try {
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
         } catch (ClassNotFoundException e) {
@@ -51,9 +52,9 @@ public class UsuarioPFDAOJavaDb implements CadastroUsuarioPFDAO{
         try {
             Connection con = DriverManager.getConnection("jdbc:derby:DB_LEILOES;create=true");
             Statement sta = con.createStatement();
-            String sql = "CREATE TABLE USUARIO_PF ("
+            String sql = "CREATE TABLE USUARIO_PJ ("
                     + "ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                    + "CPF CHAR(14) NOT NULL," + "NOME VARCHAR(100) NOT NULL," + "EMAIL VARCHAR(100) NOT NULL" + ")";
+                    + "CNPJ CHAR(16) NOT NULL," + "NOME VARCHAR(100) NOT NULL," + "EMAIL VARCHAR(100) NOT NULL" + ")";
             sta.executeUpdate(sql);
             sta.close();
             con.close();
@@ -66,38 +67,39 @@ public class UsuarioPFDAOJavaDb implements CadastroUsuarioPFDAO{
         return DriverManager.getConnection("jdbc:derby:DB_Leiloes");
     }
 
-    public boolean adicionarPF(UsuarioPF usuarioPF) throws DAOException {
+    @Override
+    public boolean adicionarPJ(UsuarioPJ usuarioPJ) throws DAOException {
         try {
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO USUARIO_PF (cpf, nome, email) VALUES (?,?,?)"
+                    "INSERT INTO USUARIO_PJ (cnpj, nome, email) VALUES (?,?,?)"
             );
-            stmt.setString(1, usuarioPF.getCpf());
-            stmt.setString(2, usuarioPF.getNome());
-            stmt.setString(3, usuarioPF.getEmail());
+            stmt.setString(1, usuarioPJ.getCnpj());
+            stmt.setString(2, usuarioPJ.getNome());
+            stmt.setString(3, usuarioPJ.getEmail());
             int retorno = stmt.executeUpdate();
             con.close();
             return (retorno > 0);
         } catch (SQLException ex) {
-            throw new DAOException("Falua ao adicionar Pessoa Fisica.", ex);
+            throw new DAOException("Falua ao adicionar Pessoa Jurídica.", ex);
         }
-    }    
+    }
 
     @Override
     public List<Usuario> getTodos() throws DAOException {
         try {
             Connection con = getConnection();
             Statement stmt = con.createStatement();
-            ResultSet result = stmt.executeQuery("SELECT * FROM USUARIO_PF");
-            List<Usuario> listaPF = new ArrayList<Usuario>();
-            while(result.next()) {
-                String cpf = result.getString("cpf");
+            ResultSet result = stmt.executeQuery("SELECT * FROM USUARIO_PJ");
+            List<Usuario> listaPJ = new ArrayList<Usuario>();
+            while (result.next()) {
+                String cnpj = result.getString("cnpj");
                 String nome = result.getString("nome");
                 String email = result.getString("email");
-                UsuarioPF pf = new UsuarioPF(cpf, nome, email);
-                listaPF.add(pf);
+                UsuarioPJ pj = new UsuarioPJ(cnpj, nome, email);
+                listaPJ.add(pj);
             }
-            return listaPF;
+            return listaPJ;
         } catch (SQLException ex) {
             throw new DAOException("Falha ao buscar.", ex);
         }

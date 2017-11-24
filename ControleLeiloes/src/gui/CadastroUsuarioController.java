@@ -9,6 +9,7 @@ import dados.DAOException;
 import java.util.ArrayList;
 import java.util.List;
 import negocio.CadastroUsuarioFacade;
+import negocio.Usuario;
 import negocio.UsuarioPF;
 
 /**
@@ -22,7 +23,7 @@ public class CadastroUsuarioController {
 
     public CadastroUsuarioController() throws DAOException {
         facade = new CadastroUsuarioFacade();
-        model = new ListaUsuariosModel(facade.buscarTodos());;
+        model = new ListaUsuariosModel(facade.buscarTodosPF());;
     }
 
     private List<String> toListString(List<UsuarioPF> listaOrigem) {
@@ -33,16 +34,24 @@ public class CadastroUsuarioController {
         return listaDestino;
     }
 
-    public boolean adicionarUsuario(String cpf, String nome, String email) throws DAOException {
-        UsuarioPF usuarioPF = facade.adicionarUsuarioPF(cpf, nome, email);
-        if (usuarioPF != null) {
-            model.add(usuarioPF);
+    public boolean adicionarUsuario(String id, String nome, String email) throws DAOException {
+        Usuario usuario = facade.adicionarUsuario(id, nome, email);
+        if (usuario != null) {
+            model.add(usuario);
             return true;
         }
         return false;
     }
 
     public List<String> getTodos() throws DAOException {
-        return toListString(facade.buscarTodos());
-    }
+        List<String> lista = new ArrayList<String>();
+        for (Usuario usuario : facade.buscarTodosPF()) {
+            lista.add(usuario.getNome());
+        }
+        for (Usuario usuario: facade.buscarTodosPJ()) {
+            lista.add(usuario.getNome());
+        }
+        return lista;
+    }   
+    
 }

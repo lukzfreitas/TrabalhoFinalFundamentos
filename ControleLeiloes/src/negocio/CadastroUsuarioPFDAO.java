@@ -3,17 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui;
+package negocio;
 
 import dados.DAOException;
+import java.util.List;
 
 /**
  *
  * @author Lucas
  */
-public class App {
-    public static void main(String[] args) throws DAOException {
-        CadastroUsuarioController controller = new CadastroUsuarioController();
-        System.out.println(controller.getTodos());
-    }
+public interface CadastroUsuarioPFDAO {
+    boolean adicionarPF(UsuarioPF usuarioPF) throws DAOException;    
+    List<Usuario> getTodos() throws DAOException;
 }

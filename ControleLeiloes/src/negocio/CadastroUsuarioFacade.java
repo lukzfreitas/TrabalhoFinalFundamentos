@@ -7,6 +7,7 @@ package negocio;
 
 import dados.DAOException;
 import dados.UsuarioPFDAOJavaDb;
+import dados.UsuarioPJDAOJavaDb;
 import java.util.List;
 
 /**
@@ -15,35 +16,57 @@ import java.util.List;
  */
 public class CadastroUsuarioFacade {
 
-    private CadastroUsuarioDAO dao;
+    private CadastroUsuarioPFDAO daoPF;
+    private CadastroUsuarioPJDAO daoPJ;
 
     public CadastroUsuarioFacade() throws DAOException {
         try {
-            dao = UsuarioPFDAOJavaDb.getInstance();
+            daoPF = UsuarioPFDAOJavaDb.getInstance();
+            daoPJ = UsuarioPJDAOJavaDb.getInstance();
         } catch (DAOException e) {
             throw new DAOException("Falha na criação da fachada", e);
         }
     }
 
-    public UsuarioPF adicionarUsuarioPF(String cpf, String nome, String email) throws DAOException {
-        //TODO: Validar Usuario
-        UsuarioPF usuarioPF = new UsuarioPF(cpf, nome, email);
-        try {
-            boolean adicionado = dao.adicionar(usuarioPF);
-            if (adicionado) {
-                return usuarioPF;
+    public Usuario adicionarUsuario(String id, String nome, String email) throws DAOException {
+        if (id.length() == 14) {
+            UsuarioPF usuarioPF = new UsuarioPF(id, nome, email);
+            try {
+                boolean adicionado = daoPF.adicionarPF(usuarioPF);
+                if (adicionado) {
+                    return usuarioPF;
+                }
+                return null;
+            } catch (DAOException e) {
+                throw new DAOException("Falha ao adicionar usuário PF!", e);
             }
-            return null;
-        } catch (DAOException e) {
-            throw new DAOException("Falha ao adicionar pessoa!", e);
-        }        
+        } else {
+            UsuarioPJ usuarioPJ = new UsuarioPJ(id, nome, email);
+            try {
+                boolean adicionado = daoPJ.adicionarPJ(usuarioPJ);
+                if (adicionado) {
+                    return usuarioPJ;
+                }
+                return null;
+            } catch (DAOException e) {
+                throw new DAOException("Falha ao adicionar usuário PJ!", e);
+            }
+        }
     }
-    
-    public List<UsuarioPF> buscarTodos() throws DAOException {
+
+    public List<Usuario> buscarTodosPF() throws DAOException {
         try {
-            return dao.getTodos();
+            return daoPF.getTodos();
         } catch (DAOException e) {
-            throw new DAOException("Falha ao buscar Pessoas Físicas", e);
+            throw new DAOException("Falha ao buscar usuários", e);
+        }
+    }
+
+    public List<Usuario> buscarTodosPJ() throws DAOException {
+        try {
+            return daoPJ.getTodos();
+        } catch (DAOException e) {
+            throw new DAOException("Falha ao buscar usuários", e);
         }
     }
 }

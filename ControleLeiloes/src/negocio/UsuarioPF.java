@@ -10,9 +10,7 @@ package negocio;
  * @author Lucas
  */
 public class UsuarioPF extends Usuario{
-    private String cpf;
-    private String nome;
-    private String email;
+    private String cpf;   
 
     public UsuarioPF(String cpf, String nome, String email) {
         super(nome, email);

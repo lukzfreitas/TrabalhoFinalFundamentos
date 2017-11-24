@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Lucas
  */
-public interface CadastroUsuarioDAO {
-    boolean adicionar(UsuarioPF usuario) throws DAOException;
-    List<UsuarioPF> getTodos() throws DAOException;
+public interface CadastroUsuarioPJDAO {
+    boolean adicionarPJ(UsuarioPJ usuarioPJ) throws DAOException;    
+    List<Usuario> getTodos() throws DAOException;
 }

@@ -9,6 +9,17 @@ package negocio;
  *
  * @author Lucas
  */
-public class UsuarioPJ {
+public class UsuarioPJ extends Usuario{
+    
+    private String cnpj;
+
+    public UsuarioPJ(String cnpj, String nome, String email) {
+        super(nome, email);
+        this.cnpj = cnpj;        
+    }
+
+    public String getCnpj() {
+        return cnpj;
+    }
     
 }

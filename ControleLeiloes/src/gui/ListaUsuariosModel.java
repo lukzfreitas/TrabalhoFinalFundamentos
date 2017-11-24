@@ -8,6 +8,7 @@ package gui;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.AbstractListModel;
+import negocio.Usuario;
 import negocio.UsuarioPF;
 
 /**
@@ -16,25 +17,25 @@ import negocio.UsuarioPF;
  */
 public class ListaUsuariosModel {
     
-    private List<UsuarioPF> usuariosPF = new ArrayList<UsuarioPF>();
+    private List<Usuario> usuarios = new ArrayList<Usuario>();
 
     public ListaUsuariosModel() {
         super();
     }    
     
-    public ListaUsuariosModel(List<UsuarioPF> dados) {
-        usuariosPF.addAll(dados);
+    public ListaUsuariosModel(List<Usuario> dados) {
+        usuarios.addAll(dados);
     }    
     
     public int getSize() {
-        return usuariosPF.size();
+        return usuarios.size();
     }
     
-    public UsuarioPF getElementAt(int index) {
-        return usuariosPF.get(index);
+    public Usuario getElementAt(int index) {
+        return usuarios.get(index);
     }
     
-    public void add(UsuarioPF usuarioPF) {
-        usuariosPF.add(usuarioPF);        
+    public void add(Usuario usuario) {
+        usuarios.add(usuario);        
     }    
 }
