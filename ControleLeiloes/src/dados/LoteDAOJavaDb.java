@@ -13,25 +13,25 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import negocio.Bem;
-import negocio.CadastroBemDAO;
+import negocio.CadastroLoteDAO;
+import negocio.Lote;
 
 /**
  *
  * @author Lucas
  */
-public class BemDAOJavaDb implements CadastroBemDAO {
+public class LoteDAOJavaDb implements CadastroLoteDAO {
+    
+    private static LoteDAOJavaDb ref;
 
-    private static BemDAOJavaDb ref;
-
-    public static BemDAOJavaDb getInstance() throws DAOException {
+    public static LoteDAOJavaDb getInstance() throws DAOException {
         if (ref == null) {
-            ref = new BemDAOJavaDb();
+            ref = new LoteDAOJavaDb();
         }
         return ref;
     }
 
-    private BemDAOJavaDb() {
+    private LoteDAOJavaDb() {
         try {
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
         } catch (ClassNotFoundException e) {
@@ -49,11 +49,10 @@ public class BemDAOJavaDb implements CadastroBemDAO {
         try {
             Connection con = DriverManager.getConnection("jdbc:derby:DB_LEILOES;create=true");
             Statement sta = con.createStatement();
-            String sql = "CREATE TABLE BENS ("
-                    + "BEM_ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                    + "DESCRICAO VARCHAR(50) NOT NULL,"
-                    + "DETALHES CHAR(100) NOT NULL,"
-                    + "CATEGORIA VARCHAR(50) NOT NULL"
+            String sql = "CREATE TABLE LOTES ("
+                    + "LOTE_ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
+                    + "BEM_ID_foreign_key INT NOT NULL,"
+                    + "VALOR CHAR(100) NOT NULL"                    
                     + ")";
             sta.executeUpdate(sql);
             sta.close();
@@ -67,19 +66,17 @@ public class BemDAOJavaDb implements CadastroBemDAO {
         return DriverManager.getConnection("jdbc:derby:DB_Leiloes");
     }
 
-    public boolean adicionar(Bem bem) throws DAOException {
+    public boolean adicionar(Lote lote) throws DAOException {
         try {
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO BENS ("
-                    + "DESCRICAO, "
-                    + "DETALHES,"
-                    + "CATEGORIA)"
-                    + " VALUES (?,?,?)"
+                    "INSERT INTO LOTES ("
+                    + "BEM_ID, "
+                    + "VALOR)"                    
+                    + " VALUES (?,?)"
             );
-            stmt.setString(1, bem.getDescricao());
-            stmt.setString(2, bem.getDetalhes());
-            stmt.setString(3, bem.getCategoria());
+            stmt.setInt(1, lote.getBemId());
+            stmt.setDouble(2, lote.getValor());            
             int ret = stmt.executeUpdate();
             con.close();
             return (ret > 0);
@@ -89,41 +86,40 @@ public class BemDAOJavaDb implements CadastroBemDAO {
     }
 
     @Override
-    public List<Bem> getTodos() throws DAOException {
+    public List<Lote> getTodos() throws DAOException {
         try {
             Connection con = getConnection();
             Statement stmt = con.createStatement();
-            ResultSet result = stmt.executeQuery("SELECT * FROM BENS");
-            List<Bem> listaBens = new ArrayList<Bem>();
+            ResultSet result = stmt.executeQuery("SELECT * FROM LOTES");
+            List<Lote> listaLotes = new ArrayList<Lote>();
             while (result.next()) {
-                String descricao = result.getString("DESCRICAO");
-                String detalhes = result.getString("DETALHES");
-                String categoria = result.getString("CATEGORIA");
-                Bem bem = new Bem(descricao, detalhes, categoria);
-                listaBens.add(bem);
+                int loteId = result.getInt("LOTE_ID");
+                int bemId = result.getInt("BEM_ID");                
+                double valor = result.getDouble("VALOR");
+                Lote lote = new Lote(loteId, bemId, valor);
+                listaLotes.add(lote);
             }
-            return listaBens;
+            return listaLotes;
         } catch (SQLException ex) {
             throw new DAOException("Falha ao buscar.", ex);
         }
     }
-
+    
     @Override
-    public Bem getBem(int bemId) throws DAOException {
-        try {
+    public Lote getLote(int loteId) throws DAOException {
+            try {
             Connection con = getConnection();
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM BENS WHERE BEM_ID=?");
-            stmt.setString(1, Integer.toString(bemId));
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM LOTES WHERE LOTE_ID=?");
+            stmt.setString(1, Integer.toString(loteId));
             ResultSet resultado = stmt.executeQuery();
-            Bem bem = null;
+            Lote lote = null;
             if (resultado.next()) {
+                int lote_Id = Integer.parseInt(resultado.getString("LOTE_ID"));
                 int bem_Id = Integer.parseInt(resultado.getString("BEM_ID"));
-                String descricao = resultado.getString("DESCRICAO");
-                String detalhes = resultado.getString("DETALHES");
-                String categoria = resultado.getString("CATEGORIA");
-                bem = new Bem(bem_Id, descricao, detalhes, categoria);
+                double valor = Double.parseDouble(resultado.getString("VALOR"));
+                lote = new Lote(lote_Id, bem_Id, valor);                
             }
-            return bem;
+            return lote;
         } catch (SQLException ex) {
             throw new DAOException("Falha ao buscar.", ex);
         }
