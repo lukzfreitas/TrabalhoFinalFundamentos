@@ -54,7 +54,10 @@ public class UsuarioPJDAOJavaDb implements CadastroUsuarioPJDAO {
             Statement sta = con.createStatement();
             String sql = "CREATE TABLE USUARIO_PJ ("
                     + "ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                    + "CNPJ CHAR(16) NOT NULL," + "NOME VARCHAR(100) NOT NULL," + "EMAIL VARCHAR(100) NOT NULL" + ")";
+                    + "CNPJ CHAR(16) NOT NULL," 
+                    + "NOME VARCHAR(100) NOT NULL," 
+                    + "EMAIL VARCHAR(100) NOT NULL" 
+                    + ")";
             sta.executeUpdate(sql);
             sta.close();
             con.close();

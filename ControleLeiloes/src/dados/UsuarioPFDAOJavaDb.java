@@ -53,7 +53,10 @@ public class UsuarioPFDAOJavaDb implements CadastroUsuarioPFDAO{
             Statement sta = con.createStatement();
             String sql = "CREATE TABLE USUARIO_PF ("
                     + "ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                    + "CPF CHAR(14) NOT NULL," + "NOME VARCHAR(100) NOT NULL," + "EMAIL VARCHAR(100) NOT NULL" + ")";
+                    + "CPF CHAR(14) NOT NULL," 
+                    + "NOME VARCHAR(100) NOT NULL," 
+                    + "EMAIL VARCHAR(100) NOT NULL" 
+                    + ")";
             sta.executeUpdate(sql);
             sta.close();
             con.close();
