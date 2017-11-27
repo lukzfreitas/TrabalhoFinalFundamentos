@@ -6,16 +6,18 @@
 package gui;
 
 import dados.DAOException;
+import java.io.FileNotFoundException;
+import java.sql.SQLException;
+import negocio.ImportarSQL;
 
 /**
  *
  * @author Lucas
  */
 public class App {
-    public static void main(String[] args) throws DAOException {
-//        CadastroUsuarioController controller = new CadastroUsuarioController();
-        CadastroBemController controller = new CadastroBemController();
-        controller.adicionarBem("Computador", "Computador Dell 1 TB", "Informática");
+    public static void main(String[] args) throws DAOException, SQLException, FileNotFoundException {
+//        ImportarSQL.execute("C:\\Users\\Lucas\\OneDrive\\Documentos\\PUCRS\\Fund. Desenv. SW\\TrabalhoFinalFundamentos\\ControleLeiloes\\ScriptsBanco.txt");
+        CadastroUsuarioController controller = new CadastroUsuarioController();
         System.out.println(controller.getTodos());
     }
 }

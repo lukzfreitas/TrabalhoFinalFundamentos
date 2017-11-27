@@ -1,0 +1,296 @@
+-- criação das tabelas
+CREATE TABLE USUARIOS_PF(
+	CPF CHAR(14) NOT NULL PRIMARY KEY,
+	NOME VARCHAR (100)  NOT NULL,
+	EMAIL VARCHAR (100) NOT NULL
+);
+
+CREATE TABLE USUARIOS_PJ(
+	CNPJ CHAR (18) NOT NULL PRIMARY KEY,
+	NOME VARCHAR (100) NOT NULL,
+	EMAIL VARCHAR (100) NOT NULL
+);
+
+CREATE TABLE BENS(
+	BEM_ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+        (START WITH 1, INCREMENT BY 1),
+	DESCRICAO VARCHAR(500) NOT NULL,
+	DETALHES VARCHAR(500),
+	CATEGORIA VARCHAR(100)
+);
+
+CREATE TABLE LOTES(
+	LOTE_ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+		(START WITH 1, INCREMENT BY 1),
+	BEM_ID_foreign_key INTEGER NOT NULL,
+	CONSTRAINT BEM_ID FOREIGN KEY (BEM_ID_foreign_key) REFERENCES BENS(BEM_ID),
+	VALOR DOUBLE
+);
+
+CREATE TABLE LEILOES(
+	LEILAO_ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+		(START WITH 1, INCREMENT BY 1),
+	LOTE_ID_foreign_key INTEGER NOT NULL,
+	CONSTRAINT LOTE_ID FOREIGN KEY (LOTE_ID_foreign_key) REFERENCES LOTES(LOTE_ID),
+	DATA_INICIO TIMESTAMP NOT NULL, 
+	DATA_FIM TIMESTAMP NOT NULL, 
+	ARREMATE DOUBLE,
+	VENCEDOR CHAR(18),
+	TIPO CHAR(18) NOT NULL,
+	TIPO_LANCE CHAR(18) NOT NULL
+);
+
+CREATE TABLE LANCES(
+	LANCE_ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+		(START WITH 1, INCREMENT BY 1),
+	LEILAO_ID_foreign_key INTEGER NOT NULL,
+	CONSTRAINT LEILAO_ID FOREIGN KEY (LEILAO_ID_foreign_key) REFERENCES LEILOES(LEILAO_ID),
+	USUARIO_ID CHAR(18),
+	VALOR DOUBLE NOT NULL,
+	DATA TIMESTAMP NOT NULL
+);
+
+-- população DB Tabela USUARIOS_PF
+
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('123.456.789-10', 'Junior', 'junior@naofezotrabalho.com');
+
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('122.456.789-10', 'Joao', 'john@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('133.456.789-10', 'Pedro', 'peter@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('144.456.789-10', 'Matheus', 'matheusinha@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('155.456.789-10', 'Jesus', 'amem@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('166.456.789-10', 'Thiago', 'thiago@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('177.456.789-10', 'Pitagoras', 'supletivo@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('188.456.789-10', 'Baskara', 'menosb@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('199.456.789-10', 'Platao', 'plato@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('200.456.789-10', 'James', 'james_007@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('201.456.789-10', 'Neymar', 'ousadiaealegria@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('202.456.789-10', 'Ronaldo', 'ronaldo@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('203.456.789-10', 'Romario', 'riomario@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('204.456.789-10', 'Cynthya', 'cynthya@naofezotrabalho.com');
+ 
+INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
+VALUES('205.456.789-00', 'Marilene', 'merilene@naofezotrabalho.com');
+
+-- população DB Tabela USUARIOS_PJ
+
+INSERT INTO USUARIOS_PJ(CNPJ, NOME, EMAIL)
+VALUES('20.588.666.0001-10', 'balao da informatica', 'balao@balaodainformatica.com');
+ 
+INSERT INTO USUARIOS_PJ(CNPJ, NOME, EMAIL)
+VALUES('20.546.627.0001-10', 'moveis kikasa', 'kikasa@kikasamoveis.com');
+ 
+INSERT INTO USUARIOS_PJ(CNPJ, NOME, EMAIL)
+VALUES('20.146.613.0001-10', 'construcao', 'construcao@construcao.com');
+ 
+INSERT INTO USUARIOS_PJ(CNPJ, NOME, EMAIL)
+VALUES('20.986.654.0001-10', 'esportes esportivos', 'contato@esportesesportivos.com');
+ 
+INSERT INTO USUARIOS_PJ(CNPJ, NOME, EMAIL)
+VALUES('20.982.735.0001-10', 'Games FarOll', 'noreply@faroll.com');
+ 
+INSERT INTO USUARIOS_PJ(CNPJ, NOME, EMAIL)
+VALUES('23.672.745.0001-10', 'Magazine da Casa', 'noreply@magazinedacasa.com');
+
+-- população DB Tabela BEM
+
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('SmarTv LED 55', 'Smart TV LED 55" Full HD LG 55LJ5550 com Painel IPS Wi-Fi WebOS', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Speaker/Powerbank', 'Acessório Speaker/Powerbank Rock in Rio', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Soundbar JBL', 'Soundbar JBL Cinema SB150 2.1 Canais 150W Bluetooth com Subwoofer', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Caixa de Som Bluetooth', 'Caixa de Som Bluetooth Harman Kardon Onyx Mini Azul', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Mini Syste', 'Mini System Philips NTX600X/78 com MP3 Bluetooth Duplo USB e Ripping – 2.200 W', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Home Theater Philips', 'Home Theater Philips Fidelio E5 CSS7235Y/12 4.1 Canais com Caixas Traseiras Wireless, Bluetooth', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('iPhone SE', 'Smartphone iPhone SE Apple 64GB Prateado 4G Tela 4" Retina Câm 12MP iOS 10', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Samsung Galaxy A5', 'Smartphone Samsung Galaxy A5 Dual Chip Android 6.0 Tela 5.2" Octa-Core 1.9GHz 32GB 4G Câmera 16MP', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Zenfone 3', 'Zenfone 3 Max Cinza Asus, com Tela de 5,5", 4G, 32 GB e Câmera de 16 MP', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Drone', 'Sky Storm Drone com Gyro - Candide', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Tablet/Reader Lev', 'Lev Fit', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('iPhone 7', 'Apple iPhone 7 Plus 32GB Desbloqueado Preto Matte', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Fone de Ouvido Sony', 'Fone de Ouvido Sony Headphone Preto', 'eletrônicos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Camiseta NBA', 'Roupas - NBA', 'esportes');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Tênis adidas', 'Tênis adidas Duramo 8 Azul', 'esportes');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Jogo Bingo Drink', 'Jogo Bingo Ludi Drink da Vez', 'diversos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Relógio Masculino', 'Relógio Masculino Analógico Champion', 'diversos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Panela de Pressão', 'Panela de Pressão de Alumínio Polido com Capacidade de 4,5L Turbo Top, com Janela de Segurança', 'diversos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Panela 3 em 1', 'Panela 3 em 1 Tramontina Paris', 'diversos');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Cama Box + Colchão ', 'Cama Box + Colchão Millenium Bambu King Size Mola Ensacada c/Tecido Jacquard 1,93 x 2,03cm', 'móveis e decoração');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Liquidificador Mondial', 'Liquidificador Mondial Premium Black L1000 com 12 Velocidades e 1000W', 'eletrodoméstico');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Fritadeira Sem Óleo', 'Fritadeira Sem Óleo Mondial Air Fryer Digital Premium AF-02 2 Litros', 'eletrodoméstico');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Fogão 4 bocas', 'Fogão Piso 4 Bocas Atlas Acendimento Automático Glass Preto Bivolt', 'eletrodoméstico');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Batedeira', 'Batedeira Philco Power Chef com 6 Velocidades', 'eletrodoméstico');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Aspirador de Pó', 'Aspirador de Pó 800W de Potência, 1L de Capacidade, Reservatório Removível e Lavável, 2 Tubos Prolongadores', 'eletrodoméstico');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Ventilador de Mesa', 'Ventilador de Mesa Princesas Turbo Silêncio Mallory - 30 cm com 4 Pás, 42W de Potência, 3 Velocidades', 'eletrodoméstico');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Mochila', 'Mochila Speedo Braid', 'esportes');
+
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Xtreme Whey 5 Lbs', 'Xtreme Whey 5 Lbs - Bio Sport USA', 'esportes');
+
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Bicicleta Aro 24', 'Bicicleta Aro 24 Caloi - Ceci', 'esportes');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Bicicleta Aro 26', 'Bicicleta Aro 26 Vivid - Houston', 'esportes');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Super Whey 100%', 'Super Whey 100% Concentrado 907g - Integralmédica', 'esportes');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Monitor cardiaco', 'Monitor cardiaco Guga GK6100 - Kikos', 'esportes');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Call of Duty Advanced Warfare', 'Jogo Call of Duty Advanced Warfare: Gold Edition - Xbox One', 'games');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Volante Gamer G29', 'Volante Gamer G29 - PS4 PS3 e PC - Logitech', 'games');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Dying Light', 'Game Dying Light: Enhanced Edition - PS4', 'games');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Metal Gear Solid V', 'Game - Metal Gear Solid V: The Definitive Experience - PS4', 'games');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Nioh', 'Game Nioh - PS4', 'games');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Jogo For Honor', 'Jogo For Honor Limited Edition - Xbox One', 'games');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Notebook DELL Inspiron Gaming Edition', 'Notebook DELL Inspiron Gaming Edition i15-7559-a10 Intel® Core i5 8GB (GeForce GTX 960M de 4GB) 1TB 8GB SSD Tela 15.6', 'Informática');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Multifuncional Canon', 'Multifuncional Canon Tanque de tinta com Wi-Fi - G3100', 'Informática');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Processador Intel Core i7 6950X', 'Processador Intel Core i7 6950X Extreme Edition 3.5GHz 25MB LGA2011-3', 'Informática');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Notebook Samsung Essentials E21', 'Notebook Samsung Essentials E21 Intel Dual Core 4GB 500GB LED FULL HD 15,6" Windows 10', 'Informática');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Monitor LED 21.5', 'Monitor LED 21.5'' Samsung Wide S22E310 Full HD HDMI', 'Informática');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Penteadeira 2 Portas', 'Penteadeira 2 Portas com Espelho Atração', 'móveis e decoração');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Cadeira Para Escritório', 'Cadeira Para Escritório Carrefour Home Preta Ml-2431-2', 'móveis e decoração');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Poltrona Colorida Inflável', 'Poltrona Colorida Jilong com Encosto de Braço Inflável com Válvula de Retenção de Ar', 'móveis e decoração');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Sofá', 'Sofá | Estofado Sportage 3 lugares em Tecido Sued Marrom Serrano - Somopar', 'móveis e decoração');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Rack com Painel', 'Rack com Painel Gallardo MDF/MDP Amarelo Brilho - Madetec', 'móveis e decoração');
+ 
+INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
+VALUES('Esteira para Braço de Sofá', 'Esteira para Braço de Sofá Flexível com Porta Copos Vermelha - Cia Laser', 'móveis e decoração');
+
+-- população DB Tabela LOTE
+
+INSERT INTO LOTES(BEM_ID_foreign_key, VALOR)
+VALUES(037, 104.45);
+
+INSERT INTO LOTES(BEM_ID_foreign_key, VALOR)
+VALUES(046, 340.00);
+
+INSERT INTO LOTES(BEM_ID_foreign_key, VALOR)
+VALUES(002, 87);
+
+INSERT INTO LOTES(BEM_ID_foreign_key, VALOR)
+VALUES(001, 1965);
+
+INSERT INTO LOTES(BEM_ID_foreign_key, VALOR)
+VALUES(030, 199.90);
+
+-- população DB Tabela LEILAO
+-- yyyy-mm-dd hh:mm:ss
+INSERT INTO LEILOES(LOTE_ID_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
+VALUES(001, '2017-06-11 20:40:00', '2017-06-29 20:40:00', 1234, '20.588.666.0001-10','Oferta','Aberto');
+ 
+INSERT INTO LEILOES(LOTE_ID_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
+VALUES(002, '2017-06-06 21:40:00', '2017-07-02 20:30:00', 2345, '199.456.789-10','Demanda','Aberto');
+ 
+INSERT INTO LEILOES(LOTE_ID_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
+VALUES(003, '2017-06-06 17:40:00', '2017-07-10 20:00:00', 9486, '200.456.789-10','Oferta','Aberto');
+ 

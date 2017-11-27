@@ -73,7 +73,7 @@ public class UsuarioPFDAOJavaDb implements CadastroUsuarioPFDAO{
         try {
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO USUARIO_PF (cpf, nome, email) VALUES (?,?,?)"
+                    "INSERT INTO USUARIOS_PF (CPF, NOME, EMAIL) VALUES (?,?,?)"
             );
             stmt.setString(1, usuarioPF.getCpf());
             stmt.setString(2, usuarioPF.getNome());
@@ -91,7 +91,7 @@ public class UsuarioPFDAOJavaDb implements CadastroUsuarioPFDAO{
         try {
             Connection con = getConnection();
             Statement stmt = con.createStatement();
-            ResultSet result = stmt.executeQuery("SELECT * FROM USUARIO_PF");
+            ResultSet result = stmt.executeQuery("SELECT * FROM USUARIOS_PF");
             List<Usuario> listaPF = new ArrayList<Usuario>();
             while(result.next()) {
                 String cpf = result.getString("cpf");

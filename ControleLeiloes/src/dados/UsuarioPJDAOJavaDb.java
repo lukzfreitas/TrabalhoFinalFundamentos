@@ -75,7 +75,7 @@ public class UsuarioPJDAOJavaDb implements CadastroUsuarioPJDAO {
         try {
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO USUARIO_PJ (cnpj, nome, email) VALUES (?,?,?)"
+                    "INSERT INTO USUARIOS_PJ (CNPJ, NOME, EMAIL) VALUES (?,?,?)"
             );
             stmt.setString(1, usuarioPJ.getCnpj());
             stmt.setString(2, usuarioPJ.getNome());
@@ -93,7 +93,7 @@ public class UsuarioPJDAOJavaDb implements CadastroUsuarioPJDAO {
         try {
             Connection con = getConnection();
             Statement stmt = con.createStatement();
-            ResultSet result = stmt.executeQuery("SELECT * FROM USUARIO_PJ");
+            ResultSet result = stmt.executeQuery("SELECT * FROM USUARIOS_PJ");
             List<Usuario> listaPJ = new ArrayList<Usuario>();
             while (result.next()) {
                 String cnpj = result.getString("cnpj");
