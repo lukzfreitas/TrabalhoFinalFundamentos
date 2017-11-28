@@ -176,7 +176,7 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
                 double arremate = Double.parseDouble(resultado.getString("ARREMATE"));
                 String vencedor = resultado.getString("VENCEDOR");
                 String tipo_leilao = resultado.getString("TIPO");
-                String tipo_lance = resultado.getString("LANCE");
+                String tipo_lance = resultado.getString("TIPO_LANCE");
 
                 Leilao leilao = new Leilao(leilaoId, loteId, arremate, vencedor, tipo_lance, tipo_lance, dataIni, dataFim);
                 leilao.desativa();
@@ -267,19 +267,19 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
     public List<Leilao> getLanceAberto() throws DAOException, ParseException {
         try {
             Connection con = getConnection();
-            PreparedStatement stmt = con.prepareStatement("SELECT * FROM LEILORES WHERE TIPO_LANCE=?");
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM LEILOES WHERE TIPO_LANCE=?");
             stmt.setString(1, "ABERTO");
             ResultSet resultado = stmt.executeQuery();
             List<Leilao> listaLeiloesLanceAberto = new ArrayList<Leilao>();
             while (resultado.next()) {
-                int leilaoId = Integer.parseInt(resultado.getString("leilao_id"));
+                int leilaoId = Integer.parseInt(resultado.getString("LEILAO_ID"));
                 int loteId = Integer.parseInt(resultado.getString("LOTE_ID_foreign_key"));
-                String dataIni = resultado.getString("leilao_dataInicio");
-                String dataFim = resultado.getString("leilao_dataFim");
-                double arremate = Double.parseDouble(resultado.getString("leilao_arremate"));
-                String vencedor = resultado.getString("leilao_vencedor");
-                String tipo_leilao = resultado.getString("leilao_tipo");
-                String tipo_lance = resultado.getString("leilao_tipo_lance");
+                String dataIni = resultado.getString("DATA_INICIO");
+                String dataFim = resultado.getString("DATA_FIM");
+                double arremate = Double.parseDouble(resultado.getString("ARREMATE"));
+                String vencedor = resultado.getString("VENCEDOR");
+                String tipo_leilao = resultado.getString("TIPO");
+                String tipo_lance = resultado.getString("TIPO_LANCE");
 
                 Leilao leilao = new Leilao(leilaoId, loteId, arremate, vencedor, tipo_lance, tipo_lance, dataIni, dataFim);
 

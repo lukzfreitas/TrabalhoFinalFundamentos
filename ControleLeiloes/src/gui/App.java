@@ -8,16 +8,16 @@ package gui;
 import dados.DAOException;
 import java.io.FileNotFoundException;
 import java.sql.SQLException;
-import negocio.ImportarSQL;
+import java.text.ParseException;
 
 /**
  *
  * @author Lucas
  */
 public class App {
-    public static void main(String[] args) throws DAOException, SQLException, FileNotFoundException {
+    public static void main(String[] args) throws DAOException, SQLException, FileNotFoundException, ParseException {
 //        ImportarSQL.execute("C:\\Users\\Lucas\\OneDrive\\Documentos\\PUCRS\\Fund. Desenv. SW\\TrabalhoFinalFundamentos\\ControleLeiloes\\ScriptsBanco.txt");
-        CadastroUsuarioController controller = new CadastroUsuarioController();
-        System.out.println(controller.getTodos());
+        CadastroLeilaoController leilaoController = new CadastroLeilaoController();
+        System.out.println(leilaoController.getEncerrados());
     }
 }

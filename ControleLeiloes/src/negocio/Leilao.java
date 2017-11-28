@@ -100,6 +100,6 @@ public class Leilao {
 
     @Override
     public String toString() {
-        return "Leilao{" + "leilaoId=" + leilaoId + ", loteId=" + loteId + ", arremate=" + arremate + ", vencedor=" + vencedor + ", tipo=" + tipo + ", tipoLance=" + tipoLance + ", dataIni=" + dataIni + ", dataFim=" + dataFim + ", status=" + status + '}';
+        return "código: " + leilaoId + " arremate:" + arremate + " vencedor:" + vencedor + ", tipo: " + tipo + ", tipoLance: " + tipoLance + ", Data Inicio:" + dataIni + ", Data Fim: " + dataFim + " status:" + status + '}';
     }
 }
