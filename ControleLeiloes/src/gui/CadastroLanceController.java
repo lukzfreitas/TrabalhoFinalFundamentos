@@ -17,7 +17,7 @@ import negocio.Lance;
  */
 public class CadastroLanceController {
     
-    private CadastroLanceFacade facade;    
+    private CadastroLanceFacade facade;        
     private ListaLanceModel listaLanceModel;
 
     public CadastroLanceController() throws DAOException{

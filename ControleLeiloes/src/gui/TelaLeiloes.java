@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import negocio.Bem;
 
 /**
@@ -23,6 +24,9 @@ public class TelaLeiloes extends javax.swing.JFrame {
      */
     public TelaLeiloes() {
         initComponents();
+        descricao_bemTextField.setEditable(false);
+        detalhes_bemTextField.setEditable(false);
+        categoria_bemTextField.setEditable(false);
     }
 
     /**
@@ -58,26 +62,28 @@ public class TelaLeiloes extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         tipoLanceTextField = new javax.swing.JTextField();
         CadastrarLote = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        valorMinimo = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         dataInicioLabel.setText("Data Inicio");
-        getContentPane().add(dataInicioLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, -1, -1));
-        getContentPane().add(dataInicioTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 80, 90, -1));
+        getContentPane().add(dataInicioLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
+        getContentPane().add(dataInicioTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 90, -1));
 
         dataFimLabel.setText("Data Fim");
-        getContentPane().add(dataFimLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, -1, -1));
-        getContentPane().add(dataFimTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 90, -1));
+        getContentPane().add(dataFimLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 80, -1, -1));
+        getContentPane().add(dataFimTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 90, -1));
 
         tipoLabel.setText("Tipo");
-        getContentPane().add(tipoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 120, -1, -1));
-        getContentPane().add(tipoTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 153, -1));
+        getContentPane().add(tipoLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, -1, -1));
+        getContentPane().add(tipoTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 120, 153, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cadastro de Leilões");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 20, 538, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 20, 538, -1));
 
         cadastrar.setText("Cadastrar Leilão");
         cadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -85,36 +91,36 @@ public class TelaLeiloes extends javax.swing.JFrame {
                 cadastrarActionPerformed(evt);
             }
         });
-        getContentPane().add(cadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 640, 190, 50));
+        getContentPane().add(cadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 640, 190, 50));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Cadastrar Lote");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 540, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 170, 540, -1));
 
         jLabel3.setText("Valor do Lote");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 220, -1, -1));
-        getContentPane().add(valorDoLote, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, 170, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, -1, -1));
+        getContentPane().add(valorDoLote, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 220, 170, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("Inserir Bens");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, -1));
 
         jLabel5.setText("Descrição");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 330, -1, -1));
-        getContentPane().add(descricao_bemTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, 190, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, -1, -1));
+        getContentPane().add(descricao_bemTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 330, 190, -1));
 
         jLabel6.setText("Detalhes");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 380, -1, -1));
-        getContentPane().add(detalhes_bemTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, 340, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, -1, -1));
+        getContentPane().add(detalhes_bemTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 380, 340, -1));
 
         jLabel7.setText("Categoria");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, -1, -1));
-        getContentPane().add(categoria_bemTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 330, 200, -1));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 330, -1, -1));
+        getContentPane().add(categoria_bemTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 330, 200, -1));
 
         jScrollPane1.setViewportView(listaDeBens);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 450, 630, 170));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 630, 170));
 
         AdicionarBem.setText("Adicionar Bem");
         AdicionarBem.addActionListener(new java.awt.event.ActionListener() {
@@ -122,11 +128,11 @@ public class TelaLeiloes extends javax.swing.JFrame {
                 AdicionarBemActionPerformed(evt);
             }
         });
-        getContentPane().add(AdicionarBem, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 380, -1, -1));
+        getContentPane().add(AdicionarBem, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 380, -1, -1));
 
         jLabel8.setText("Tipo Lance");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 120, -1, -1));
-        getContentPane().add(tipoLanceTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, 140, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, -1, -1));
+        getContentPane().add(tipoLanceTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 140, -1));
 
         CadastrarLote.setText("Criar Lote");
         CadastrarLote.addActionListener(new java.awt.event.ActionListener() {
@@ -134,24 +140,41 @@ public class TelaLeiloes extends javax.swing.JFrame {
                 CadastrarLoteActionPerformed(evt);
             }
         });
-        getContentPane().add(CadastrarLote, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, -1, -1));
+        getContentPane().add(CadastrarLote, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 220, -1, -1));
+
+        jLabel9.setText("Valor Mínimo");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 80, -1, -1));
+        getContentPane().add(valorMinimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 80, 140, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
-        String tipo = tipoTextField.getText();
-        String dataInicio = dataInicioTextField.getText();
-        String dataFim = dataFimTextField.getText();
-        String tipoLance = tipoLanceTextField.getText();
-        try {
-            CadastroLeilaoController leilaoController = new CadastroLeilaoController();
-            leilaoController.adicionar(loteId, 0.0, "", tipo, tipoLance, dataInicio, dataFim);
-        } catch (DAOException ex) {
-            Logger.getLogger(TelaLeiloes.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(TelaLeiloes.class.getName()).log(Level.SEVERE, null, ex);
+
+        if (!tipoTextField.getText().isEmpty()
+                || !dataInicioTextField.getText().isEmpty()
+                || !dataFimTextField.getText().isEmpty()
+                || !tipoLanceTextField.getText().isEmpty()
+                || !valorMinimo.getText().isEmpty()
+                || listaDeBens.getModel().getSize() > 0) {
+            String tipo = tipoTextField.getText();
+            String dataInicio = dataInicioTextField.getText();
+            String dataFim = dataFimTextField.getText();
+            String tipoLance = tipoLanceTextField.getText();
+            double arremate = Double.parseDouble(valorMinimo.getText());
+            try {
+                CadastroLeilaoController leilaoController = new CadastroLeilaoController();
+                leilaoController.adicionar(loteId, arremate, "", tipo, tipoLance, dataInicio, dataFim);
+                dispose();
+            } catch (DAOException ex) {
+                Logger.getLogger(TelaLeiloes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(TelaLeiloes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Campos vazios!");
         }
+
 
     }//GEN-LAST:event_cadastrarActionPerformed
 
@@ -161,9 +184,12 @@ public class TelaLeiloes extends javax.swing.JFrame {
         String categoria = categoria_bemTextField.getText();
         try {
             CadastroBemController bemController = new CadastroBemController();
-            Bem bem = bemController.adicionarBem(loteId, descricao, detalhes, categoria);            
+            Bem bem = bemController.adicionarBem(loteId, descricao, detalhes, categoria);
             model.addElement(bem.toString());
             listaDeBens.setModel(model);
+            descricao_bemTextField.setText("");
+            detalhes_bemTextField.setText("");
+            categoria_bemTextField.setText("");
         } catch (DAOException ex) {
             Logger.getLogger(TelaLeiloes.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -175,9 +201,12 @@ public class TelaLeiloes extends javax.swing.JFrame {
         try {
             CadastroLoteController loteController = new CadastroLoteController();
             boolean adicionado = loteController.adicionarLote(valor);
-            if(adicionado) {
-                loteId = loteController.getUltimoLoteId();                
-            }            
+            if (adicionado) {
+                loteId = loteController.getUltimoLoteId();
+                descricao_bemTextField.setEditable(true);
+                detalhes_bemTextField.setEditable(true);
+                categoria_bemTextField.setEditable(true);
+            }
         } catch (DAOException ex) {
             Logger.getLogger(TelaLeiloes.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -203,12 +232,14 @@ public class TelaLeiloes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JList listaDeBens;
     private javax.swing.JLabel tipoLabel;
     public javax.swing.JTextField tipoLanceTextField;
     public javax.swing.JTextField tipoTextField;
     public javax.swing.JTextField valorDoLote;
+    private javax.swing.JTextField valorMinimo;
     // End of variables declaration//GEN-END:variables
     private int loteId;
     private DefaultListModel model = new DefaultListModel();

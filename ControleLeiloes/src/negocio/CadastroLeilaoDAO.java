@@ -15,9 +15,10 @@ import java.util.List;
  */
 public interface CadastroLeilaoDAO {
     boolean adicionar(Leilao leilao) throws DAOException;
-    List<Leilao> getTodos() throws DAOException, ParseException;    
-    boolean darLance(Lance lance) throws DAOException;
+    List<Leilao> getTodos() throws DAOException, ParseException;        
     boolean encerrarLeilao(int leilaoId) throws DAOException;
+    boolean alterarVencedor(int leilaoId, String usuarioId, double arremate) throws DAOException;
+    double getArremate(int leilaoId) throws DAOException;
     List<Leilao> getAtivos() throws DAOException;
     List<Leilao> getEncerrados() throws DAOException;
     List<Leilao> getTipoOferta() throws DAOException, ParseException;

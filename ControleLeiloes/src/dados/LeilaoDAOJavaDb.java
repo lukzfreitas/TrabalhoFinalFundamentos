@@ -116,24 +116,6 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
     }
 
     @Override
-    public boolean darLance(Lance lance) throws DAOException {
-        try {
-            Connection con = getConnection();
-            PreparedStatement stmt = con.prepareStatement(
-                    "UPDATE LEILAO SET ARREMATE=? WHERE LEILAO_ID=?"
-            );
-            stmt.setString(1, Double.toString(lance.getValor()));
-            stmt.setString(2, Integer.toString(lance.getLeilaoId()));
-
-            int retorno = stmt.executeUpdate();
-            con.close();
-            return (retorno > 0);
-        } catch (SQLException ex) {
-            throw new DAOException("Falha ao dar lance.", ex);
-        }
-    }
-
-    @Override
     public List<Leilao> getAtivos() throws DAOException {
         try {
             Connection con = getConnection();
@@ -352,6 +334,37 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
             return (ret > 0);
         } catch (SQLException ex) {
             throw new DAOException("Falha ao atualizar.", ex);
+        }
+    }
+
+    @Override
+    public boolean alterarVencedor(int leilaoId, String usuarioId, double arremate) throws DAOException {
+        try {
+            Connection con = getConnection();
+            PreparedStatement stmt = con.prepareStatement("UPDATE LEILOES SET VENCEDOR=? AND ARREMATE=? WHERE LEILAO_ID=?");
+            stmt.setString(1, usuarioId);
+            stmt.setDouble(2, arremate);
+            stmt.setInt(3, leilaoId);
+            int ret = stmt.executeUpdate();
+            con.close();
+            return (ret > 0);
+        } catch (SQLException ex) {
+            throw new DAOException("Falha ao atualizar.", ex);
+        }
+    }
+
+    @Override
+    public double getArremate(int leilaoId) throws DAOException {
+        try {
+            Connection con = getConnection();
+            Statement stmt = con.createStatement();
+            ResultSet resultado = stmt.executeQuery("SELECT * FROM LEILOES WHERE LEILAO_ID=?");
+            if (resultado.next()) {
+                return Double.parseDouble(resultado.getString("ARREMATE"));
+            }
+            return 0.0;
+        } catch (SQLException ex) {
+            throw new DAOException("Falha ao buscar.", ex);
         }
     }
 

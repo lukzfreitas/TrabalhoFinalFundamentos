@@ -12,7 +12,6 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import negocio.Leilao;
 
 /**
  *
@@ -251,88 +250,104 @@ public class TelaInicial extends javax.swing.JFrame {
     }//GEN-LAST:event_atualizarLeiloesEncerradosActionPerformed
 
     private void encerrarLeilaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encerrarLeilaoActionPerformed
-        int index = leiloesEmAndamento.getSelectedIndex();
-        ListaLeilaoModel model = (ListaLeilaoModel) leiloesEmAndamento.getModel();
-        int leilaoId = model.getElementAt(index).getLeilaoId();
-        CadastroLeilaoController leilaoController;
-        try {
-            leilaoController = new CadastroLeilaoController();
-            leilaoController.encerrarLeilao(leilaoId);
-        } catch (DAOException ex) {
-            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        if (leiloesEmAndamento.isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "Selecione um leilão!");
+        } else {
+            int index = leiloesEmAndamento.getSelectedIndex();
+            ListaLeilaoModel model = (ListaLeilaoModel) leiloesEmAndamento.getModel();
+            int leilaoId = model.getElementAt(index).getLeilaoId();
+            CadastroLeilaoController leilaoController;
+            try {
+                leilaoController = new CadastroLeilaoController();
+                leilaoController.encerrarLeilao(leilaoId);
+            } catch (DAOException ex) {
+                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ParseException ex) {
+                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }//GEN-LAST:event_encerrarLeilaoActionPerformed
 
     private void cadastrarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarLanceActionPerformed
-        CadastroLanceController lanceController;
-        int leilaoIndex = leiloesEmAndamento.getSelectedIndex();
-        ListaLeilaoModel leilaoModel = (ListaLeilaoModel) leiloesEmAndamento.getModel();
-        int leilaoId = leilaoModel.getElementAt(leilaoIndex).getLeilaoId();
-
-        int usuarioIndex = listaDeUsuario.getSelectedIndex();
-        ListaUsuariosModel usuariosModel = (ListaUsuariosModel) listaDeUsuario.getModel();
-        String usuarioId = usuariosModel.getCpfOuCnpjSelecionado(usuarioIndex);
-        double valor = Double.parseDouble(
-                JOptionPane.showInputDialog(this, "Informe o valor do lance:"));
-        try {
-            lanceController = new CadastroLanceController();
-            lanceController.adicionar(leilaoId, usuarioId, valor);
-        } catch (DAOException ex) {
-            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        if (leiloesEmAndamento.isSelectionEmpty() || listaDeUsuario.isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "Selecione um leilão e um usuário!");
+        } else {
+            CadastroLanceController lanceController;
+            int leilaoIndex = leiloesEmAndamento.getSelectedIndex();
+            ListaLeilaoModel leilaoModel = (ListaLeilaoModel) leiloesEmAndamento.getModel();
+            int leilaoId = leilaoModel.getElementAt(leilaoIndex).getLeilaoId();
+            int usuarioIndex = listaDeUsuario.getSelectedIndex();
+            ListaUsuariosModel usuariosModel = (ListaUsuariosModel) listaDeUsuario.getModel();
+            String usuarioId = usuariosModel.getCpfOuCnpjSelecionado(usuarioIndex);
+            double valor = Double.parseDouble(
+                    JOptionPane.showInputDialog(this, "Informe o valor do lance:"));
+            try {
+                lanceController = new CadastroLanceController();
+                lanceController.adicionar(leilaoId, usuarioId, valor);
+            } catch (DAOException ex) {
+                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-
     }//GEN-LAST:event_cadastrarLanceActionPerformed
 
     private void verLancesLeilaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verLancesLeilaoActionPerformed
-        int index = leiloesEmAndamento.getSelectedIndex();
-        ListaLeilaoModel leilaoModel = (ListaLeilaoModel) leiloesEmAndamento.getModel();
-        int leilaoId = leilaoModel.getElementAt(index).getLeilaoId();
-        TelaLancesLeilao telaLancesLeilao = new TelaLancesLeilao();
-        try {
-            CadastroLanceController lanceController = new CadastroLanceController();
-            ListaLanceModel lanceModel = new ListaLanceModel(lanceController.getLancesPorLeilaoID(leilaoId));
-            telaLancesLeilao.listaLancesLeilao.setModel(lanceModel);
-            telaLancesLeilao.setVisible(true);
-        } catch (DAOException ex) {
-            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        if (leiloesEmAndamento.isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "Selecione um leilão!");
+        } else {
+            int index = leiloesEmAndamento.getSelectedIndex();
+            ListaLeilaoModel leilaoModel = (ListaLeilaoModel) leiloesEmAndamento.getModel();
+            int leilaoId = leilaoModel.getElementAt(index).getLeilaoId();
+            TelaLancesLeilao telaLancesLeilao = new TelaLancesLeilao();
+            try {
+                CadastroLanceController lanceController = new CadastroLanceController();
+                ListaLanceModel lanceModel = new ListaLanceModel(lanceController.getLancesPorLeilaoID(leilaoId));
+                telaLancesLeilao.listaLancesLeilao.setModel(lanceModel);
+                telaLancesLeilao.setVisible(true);
+            } catch (DAOException ex) {
+                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_verLancesLeilaoActionPerformed
 
     private void verBensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verBensActionPerformed
-        int index = leiloesEmAndamento.getSelectedIndex();
-        ListaLeilaoModel leilaoModel = (ListaLeilaoModel) leiloesEmAndamento.getModel();
-        int leilaoId = leilaoModel.getElementAt(index).getLeilaoId();
-        try {
-            CadastroBemController bemController = new CadastroBemController();
-            System.out.println(bemController.getBensPorLoteId(leilaoId));
-            ListaBemModel bemModel = new ListaBemModel(bemController.getBensPorLoteId(leilaoId));
-            TelaBensLeilao telaBensLeilao = new TelaBensLeilao();
-            telaBensLeilao.listaBensLeilao.setModel(bemModel);
-            telaBensLeilao.setVisible(true);
-        } catch (DAOException ex) {
-            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        if (leiloesEmAndamento.isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "Selecione um leilão!");
+        } else {
+            int index = leiloesEmAndamento.getSelectedIndex();
+            ListaLeilaoModel leilaoModel = (ListaLeilaoModel) leiloesEmAndamento.getModel();
+            int leilaoId = leilaoModel.getElementAt(index).getLeilaoId();
+            try {
+                CadastroBemController bemController = new CadastroBemController();
+                System.out.println(bemController.getBensPorLoteId(leilaoId));
+                ListaBemModel bemModel = new ListaBemModel(bemController.getBensPorLoteId(leilaoId));
+                TelaBensLeilao telaBensLeilao = new TelaBensLeilao();
+                telaBensLeilao.listaBensLeilao.setModel(bemModel);
+                telaBensLeilao.setVisible(true);
+            } catch (DAOException ex) {
+                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_verBensActionPerformed
 
     private void verLancesUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verLancesUsuarioActionPerformed
-        int index = listaDeUsuario.getSelectedIndex();
-        ListaUsuariosModel usuariosModel = (ListaUsuariosModel) listaDeUsuario.getModel();
-        String usuarioId = usuariosModel.getCpfOuCnpjSelecionado(index);
-        CadastroLanceController lanceController;        
-        try {
-            lanceController = new CadastroLanceController();
-            ListaLanceModel lanceModel = new ListaLanceModel(lanceController.getLancesPorUsuarioID(usuarioId));
-            TelaLancesUsuario telaLancesUsuario = new TelaLancesUsuario();
-            telaLancesUsuario.listaLancesUsuario.setModel(lanceModel);
-            telaLancesUsuario.setVisible(true);
-        } catch (DAOException ex) {
-            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        if (listaDeUsuario.isSelectionEmpty()) {
+            JOptionPane.showMessageDialog(null, "Selecione um usuário!");
+        } else {
+            int index = listaDeUsuario.getSelectedIndex();
+            ListaUsuariosModel usuariosModel = (ListaUsuariosModel) listaDeUsuario.getModel();
+            String usuarioId = usuariosModel.getCpfOuCnpjSelecionado(index);
+            CadastroLanceController lanceController;
+            try {
+                lanceController = new CadastroLanceController();
+                ListaLanceModel lanceModel = new ListaLanceModel(lanceController.getLancesPorUsuarioID(usuarioId));
+                TelaLancesUsuario telaLancesUsuario = new TelaLancesUsuario();
+                telaLancesUsuario.listaLancesUsuario.setModel(lanceModel);
+                telaLancesUsuario.setVisible(true);
+            } catch (DAOException ex) {
+                Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        
-        
     }//GEN-LAST:event_verLancesUsuarioActionPerformed
 
     /**

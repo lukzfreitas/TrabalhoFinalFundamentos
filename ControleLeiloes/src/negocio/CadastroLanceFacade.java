@@ -16,6 +16,7 @@ import java.util.List;
 public class CadastroLanceFacade {
 
     private CadastroLanceDAO dao;
+    private CadastroLeilaoDAO leilaoDao;
 
     public CadastroLanceFacade() throws DAOException {
         try {
@@ -24,16 +25,19 @@ public class CadastroLanceFacade {
             throw new DAOException("Falha na criação da fachada", e);
         }
     }
-    
+
     public Lance adicionar(
-            int leilaoId, 
-            String usuarioId,             
+            int leilaoId,
+            String usuarioId,
             double valor
     ) throws DAOException {
         Lance lance = new Lance(leilaoId, usuarioId, valor);
         try {
             boolean ok = dao.adicionar(lance);
             if (ok) {
+                if (valor > leilaoDao.getArremate(leilaoId)) {
+                    leilaoDao.alterarVencedor(leilaoId, usuarioId, valor);
+                }
                 return lance;
             }
             return null;
@@ -41,7 +45,7 @@ public class CadastroLanceFacade {
             throw new DAOException("Falha ao adicionar lance!", e);
         }
     }
-    
+
     public boolean cancelarLance(int lanceId) throws DAOException {
         try {
             return dao.cancelarLance(lanceId);
@@ -57,7 +61,7 @@ public class CadastroLanceFacade {
             throw new DAOException("Falha ao buscar todos lances", e);
         }
     }
-    
+
     public List<Lance> getLancesPorLeilaoID(int leilaoId) throws DAOException {
         try {
             return dao.getLancesPorLeilaoID(leilaoId);
@@ -65,7 +69,7 @@ public class CadastroLanceFacade {
             throw new DAOException("Falha ao buscar todos lances", e);
         }
     }
-    
+
     public List<Lance> getLancesPorUsuarioID(String usuarioId) throws DAOException {
         try {
             return dao.getLancesPorUsuarioID(usuarioId);
