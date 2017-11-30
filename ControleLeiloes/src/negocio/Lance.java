@@ -18,15 +18,14 @@ public class Lance {
     public Lance(int lanceId, int leilaoId, String usuarioId, String data, double valor) {
         this.lanceId = lanceId;
         this.leilaoId = leilaoId;
-        this.usuarioId = usuarioId;
-        this.data = data;
+        this.usuarioId = usuarioId;        
         this.valor = valor;
+        this.data = data;
     }
 
-    public Lance(int leilaoId, String usuarioId, String data, double valor) {
+    public Lance(int leilaoId, String usuarioId, double valor) {
         this.leilaoId = leilaoId;
-        this.usuarioId = usuarioId;
-        this.data = data;
+        this.usuarioId = usuarioId;        
         this.valor = valor;
     }
 
@@ -48,6 +47,11 @@ public class Lance {
 
     public double getValor() {
         return valor;
+    }
+
+    @Override
+    public String toString() {
+        return "código: " + lanceId + " -- CPF/CNPJ: " + usuarioId + " -- data: " + data + " -- valor: " + valor;
     }
     
     

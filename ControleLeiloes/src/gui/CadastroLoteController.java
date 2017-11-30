@@ -33,8 +33,8 @@ public class CadastroLoteController {
         return listaDestino;
     }
 
-    public boolean adicionarLote(int bemId, double valor) throws DAOException {
-        Lote lote = facade.adicionarLote(bemId, valor);
+    public boolean adicionarLote(double valor) throws DAOException {
+        Lote lote = facade.adicionarLote(valor);        
         if (lote != null) {
             model.add(lote);
             return true;
@@ -50,7 +50,19 @@ public class CadastroLoteController {
         return lista;
     }
     
+    public List<Integer> getIds() throws DAOException {
+        List<Integer> lista = new ArrayList<Integer>();
+        for (Lote lote : facade.buscarTodos()) {
+            lista.add(lote.getLoteId());
+        }        
+        return lista;
+    }
+    
     public Lote getLote(int loteId) throws DAOException {
         return facade.buscarLote(loteId);
+    }
+    
+    public int getUltimoLoteId() throws DAOException {
+        return getIds().get(getIds().size()-1);
     }
 }

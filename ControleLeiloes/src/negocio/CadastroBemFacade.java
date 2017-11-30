@@ -28,11 +28,12 @@ public class CadastroBemFacade {
     }
 
     public Bem adicionarBem(            
+            int loteId,
             String descricao, 
             String detalhes, 
             String categoria
     ) throws DAOException {        
-        Bem bem = new Bem(descricao, detalhes, categoria);
+        Bem bem = new Bem(loteId, descricao, detalhes, categoria);
         try {
             boolean adicionado = dao.adicionar(bem);
             if (adicionado) {

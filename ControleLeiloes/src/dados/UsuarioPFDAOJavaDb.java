@@ -39,30 +39,6 @@ public class UsuarioPFDAOJavaDb implements CadastroUsuarioPFDAO{
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-//        try {
-//            createDB();
-//        } catch (Exception ex) {
-//            System.out.println("Problemas para criar o banco: "+ex.getMessage());
-//            System.exit(0);
-//        }
-    }
-
-    private static void createDB() throws DAOException {
-        try {
-            Connection con = DriverManager.getConnection("jdbc:derby:DB_LEILOES;create=true");
-            Statement sta = con.createStatement();
-            String sql = "CREATE TABLE USUARIO_PF ("
-                    + "ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                    + "CPF CHAR(14) NOT NULL," 
-                    + "NOME VARCHAR(100) NOT NULL," 
-                    + "EMAIL VARCHAR(100) NOT NULL" 
-                    + ")";
-            sta.executeUpdate(sql);
-            sta.close();
-            con.close();
-        } catch (SQLException ex) {
-            throw new DAOException(ex.getMessage());
-        }
     }
 
     private static Connection getConnection() throws SQLException {

@@ -20,4 +20,11 @@ public class UsuarioPF extends Usuario{
     public String getCpf() {
         return cpf;
     }    
+
+    @Override
+    public String toString() {
+        return "cpf: " + cpf + super.toString();
+    }
+    
+    
 }

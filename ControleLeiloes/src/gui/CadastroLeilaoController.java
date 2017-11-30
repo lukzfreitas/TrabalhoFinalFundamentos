@@ -9,6 +9,7 @@ import dados.DAOException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import negocio.Bem;
 import negocio.CadastroLeilaoDAO;
 import negocio.CadastroLeilaoFacade;
 import negocio.Lance;
@@ -54,7 +55,7 @@ public class CadastroLeilaoController {
         return false;
     }
 
-    public List<String> getTodos() throws DAOException, ParseException {
+    public List<String> getTodos() throws DAOException, ParseException {        
         List<String> lista = new ArrayList<String>();
         for (Leilao leilao : facade.getTodos()) {
             lista.add(leilao.toString());
@@ -64,11 +65,10 @@ public class CadastroLeilaoController {
 
     public boolean darLance(
             int leilaoId,
-            String usuarioId,
-            String lanceData,
+            String usuarioId,            
             double valor
     ) throws DAOException {
-        Lance lance = facade.darLance(leilaoId, usuarioId, lanceData, valor);
+        Lance lance = facade.darLance(leilaoId, usuarioId, valor);
         if (lance != null) {
             listaLanceModel.add(lance);
             return true;
@@ -76,18 +76,18 @@ public class CadastroLeilaoController {
         return false;
     }
 
-    public List<String> getAtivos() throws DAOException {
-        List<String> lista = new ArrayList<String>();
+    public List<Leilao> getAtivos() throws DAOException {
+        List<Leilao> lista = new ArrayList<Leilao>();
         for (Leilao leilao : facade.getAtivos()) {
-            lista.add(leilao.toString());
+            lista.add(leilao);
         }
         return lista;
     }
 
-    public List<String> getEncerrados() throws DAOException {
-        List<String> lista = new ArrayList<String>();
+    public List<Leilao> getEncerrados() throws DAOException {
+        List<Leilao> lista = new ArrayList<Leilao>();
         for (Leilao leilao : facade.getEncerrados()) {
-            lista.add(leilao.toString());
+            lista.add(leilao);
         }
         return lista;
     }

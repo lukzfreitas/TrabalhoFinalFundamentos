@@ -56,14 +56,14 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(
                     "INSERT INTO LEILOES ("
-                    + "LOTE_ID_foreign_key, "
+                    + "LOTE_ID_LEILAO_foreign_key, "
                     + "DATA_INICIO, "
                     + "DATA_FIM, "
                     + "ARREMATE, "
                     + "VENCEDOR,"
                     + "TIPO, "
                     + "TIPO_LANCE"
-                    + ") VALUES (?,?,?,?,?,?,?)" //                             1        2         3            4          5             6
+                    + ") VALUES (?,?,?,?,?,?,?)"
             );
             stmt.setString(1, Integer.toString(leilao.getLoteId()));
             stmt.setString(2, leilao.getDataIni());
@@ -90,7 +90,7 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
             List<Leilao> listaLeiloes = new ArrayList<Leilao>();
             while (resultado.next()) {
                 int leilaoId = Integer.parseInt(resultado.getString("LEILAO_ID"));
-                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_foreign_key"));
+                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_LEILAO_foreign_key"));
                 String dataIni = resultado.getString("DATA_INICIO");
                 String dataFim = resultado.getString("DATA_FIM");
                 double arremate = Double.parseDouble(resultado.getString("ARREMATE"));
@@ -142,7 +142,7 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
             List<Leilao> listaLeiloesAtivos = new ArrayList<Leilao>();
             while (resultado.next()) {
                 int leilaoId = Integer.parseInt(resultado.getString("LEILAO_ID"));
-                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_foreign_key"));
+                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_LEILAO_foreign_key"));
                 String dataIni = resultado.getString("DATA_INICIO");
                 String dataFim = resultado.getString("DATA_FIM");
                 double arremate = Double.parseDouble(resultado.getString("ARREMATE"));
@@ -170,7 +170,7 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
             List<Leilao> listaLeiloesEncerrados = new ArrayList<Leilao>();
             while (resultado.next()) {
                 int leilaoId = Integer.parseInt(resultado.getString("LEILAO_ID"));
-                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_foreign_key"));
+                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_LEILAO_foreign_key"));
                 String dataIni = resultado.getString("DATA_INICIO");
                 String dataFim = resultado.getString("DATA_FIM");
                 double arremate = Double.parseDouble(resultado.getString("ARREMATE"));
@@ -199,7 +199,7 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
             List<Leilao> listaLeiloesOferta = new ArrayList<Leilao>();
             while (resultado.next()) {
                 int leilaoId = Integer.parseInt(resultado.getString("LEILAO_ID"));
-                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_foreign_key"));
+                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_LEILAO_foreign_key"));
                 String dataIni = resultado.getString("DATA_INICIO");
                 String dataFim = resultado.getString("DATA_FIM");
                 double arremate = Double.parseDouble(resultado.getString("ARREMATE"));
@@ -236,7 +236,7 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
             List<Leilao> listaLeiloesDemanda = new ArrayList<Leilao>();
             while (resultado.next()) {
                 int leilaoId = Integer.parseInt(resultado.getString("LEILAO_ID"));
-                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_foreign_key"));
+                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_LEILAO_foreign_key"));
                 String dataIni = resultado.getString("DATA_INICIO");
                 String dataFim = resultado.getString("DATA_FIM");
                 double arremate = Double.parseDouble(resultado.getString("ARREMATE"));
@@ -273,7 +273,7 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
             List<Leilao> listaLeiloesLanceAberto = new ArrayList<Leilao>();
             while (resultado.next()) {
                 int leilaoId = Integer.parseInt(resultado.getString("LEILAO_ID"));
-                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_foreign_key"));
+                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_LEILAO_foreign_key"));
                 String dataIni = resultado.getString("DATA_INICIO");
                 String dataFim = resultado.getString("DATA_FIM");
                 double arremate = Double.parseDouble(resultado.getString("ARREMATE"));
@@ -310,7 +310,7 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
             List<Leilao> listaLeiloesLanceFechado = new ArrayList<Leilao>();
             while(resultado.next()) {
             	int leilaoId = Integer.parseInt(resultado.getString("LEILAO_ID"));
-                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_foreign_key"));
+                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_LEILAO_foreign_key"));
                 String dataIni = resultado.getString("DATA_INICIO");
                 String dataFim = resultado.getString("DATA_FIM");
                 double arremate = Double.parseDouble(resultado.getString("ARREMATE"));

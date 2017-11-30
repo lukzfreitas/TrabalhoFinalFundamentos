@@ -21,5 +21,9 @@ public class UsuarioPJ extends Usuario{
     public String getCnpj() {
         return cnpj;
     }
-    
+
+    @Override
+    public String toString() {
+        return "cnpj: " + cnpj + super.toString();
+    }
 }

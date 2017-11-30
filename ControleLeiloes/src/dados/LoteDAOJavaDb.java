@@ -37,30 +37,7 @@ public class LoteDAOJavaDb implements CadastroLoteDAO {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-//        try {
-//            createDB();
-//        } catch (Exception ex) {
-//            System.out.println("Problemas para criar o banco: " + ex.getMessage());
-//            System.exit(0);
-//        }
-    }
-
-    private static void createDB() throws DAOException {
-        try {
-            Connection con = DriverManager.getConnection("jdbc:derby:DB_LEILOES;create=true");
-            Statement sta = con.createStatement();
-            String sql = "CREATE TABLE LOTES ("
-                    + "LOTE_ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                    + "BEM_ID_foreign_key INT NOT NULL,"
-                    + "VALOR CHAR(100) NOT NULL"                    
-                    + ")";
-            sta.executeUpdate(sql);
-            sta.close();
-            con.close();
-        } catch (SQLException ex) {
-            throw new DAOException(ex.getMessage());
-        }
-    }
+    }    
 
     private static Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:derby:DB_Leiloes");
@@ -70,13 +47,9 @@ public class LoteDAOJavaDb implements CadastroLoteDAO {
         try {
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(
-                    "INSERT INTO LOTES ("
-                    + "BEM_ID, "
-                    + "VALOR)"                    
-                    + " VALUES (?,?)"
-            );
-            stmt.setInt(1, lote.getBemId());
-            stmt.setDouble(2, lote.getValor());            
+                    "INSERT INTO LOTES (VALOR) VALUES (?)"
+            );            
+            stmt.setDouble(1, lote.getValor());            
             int ret = stmt.executeUpdate();
             con.close();
             return (ret > 0);
@@ -93,10 +66,9 @@ public class LoteDAOJavaDb implements CadastroLoteDAO {
             ResultSet result = stmt.executeQuery("SELECT * FROM LOTES");
             List<Lote> listaLotes = new ArrayList<Lote>();
             while (result.next()) {
-                int loteId = result.getInt("LOTE_ID");
-                int bemId = result.getInt("BEM_ID");                
+                int loteId = result.getInt("LOTE_ID");                
                 double valor = result.getDouble("VALOR");
-                Lote lote = new Lote(loteId, bemId, valor);
+                Lote lote = new Lote(loteId, valor);
                 listaLotes.add(lote);
             }
             return listaLotes;
@@ -114,10 +86,9 @@ public class LoteDAOJavaDb implements CadastroLoteDAO {
             ResultSet resultado = stmt.executeQuery();
             Lote lote = null;
             if (resultado.next()) {
-                int lote_Id = Integer.parseInt(resultado.getString("LOTE_ID"));
-                int bem_Id = Integer.parseInt(resultado.getString("BEM_ID"));
+                int lote_Id = Integer.parseInt(resultado.getString("LOTE_ID"));                
                 double valor = Double.parseDouble(resultado.getString("VALOR"));
-                lote = new Lote(lote_Id, bem_Id, valor);                
+                lote = new Lote(lote_Id, valor);                
             }
             return lote;
         } catch (SQLException ex) {

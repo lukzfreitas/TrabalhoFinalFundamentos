@@ -35,11 +35,10 @@ public class CadastroLanceController {
     
     public boolean adicionar(
             int leilaoId, 
-            String usuarioId, 
-            String data, 
+            String usuarioId,
             double valor
     ) throws DAOException {
-        Lance lance = new Lance(leilaoId, usuarioId, data, valor);
+        Lance lance = facade.adicionar(leilaoId, usuarioId, valor);
         if (lance != null) {
             listaLanceModel.add(lance);
             return true;
@@ -47,18 +46,26 @@ public class CadastroLanceController {
         return false;
     }
     
-    public List<String> getTodos() throws DAOException{
-        List<String> lista = new ArrayList<String>();
+    public List<Lance> getTodos() throws DAOException{
+        List<Lance> lista = new ArrayList<Lance>();
         for (Lance lance : facade.getTodos()) {
-            lista.add(lance.toString());
+            lista.add(lance);
         }
         return lista;
     }
     
-    public List<String> getLancesPorLeilaoID(int leilaoId) throws DAOException {
-        List<String> lista = new ArrayList<String>();
+    public List<Lance> getLancesPorLeilaoID(int leilaoId) throws DAOException {
+        List<Lance> lista = new ArrayList<Lance>();
         for (Lance lance : facade.getLancesPorLeilaoID(leilaoId)) {
-            lista.add(lance.toString());
+            lista.add(lance);
+        }
+        return lista;
+    }
+    
+    public List<Lance> getLancesPorUsuarioID(String usuarioId) throws DAOException {
+        List<Lance> lista = new ArrayList<Lance>();
+        for(Lance lance : facade.getLancesPorUsuarioID(usuarioId)) {
+            lista.add(lance);
         }
         return lista;
     }

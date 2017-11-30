@@ -7,6 +7,7 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.AbstractListModel;
 import negocio.Bem;
 import negocio.Usuario;
 
@@ -14,7 +15,7 @@ import negocio.Usuario;
  *
  * @author Lucas
  */
-public class ListaBemModel {
+public class ListaBemModel extends AbstractListModel<Bem>{
 
     private List<Bem> bens = new ArrayList<Bem>();
 
@@ -26,10 +27,12 @@ public class ListaBemModel {
         bens.addAll(dados);
     }    
     
+    @Override
     public int getSize() {
         return bens.size();
     }
     
+    @Override
     public Bem getElementAt(int index) {
         return bens.get(index);
     }
@@ -37,4 +40,8 @@ public class ListaBemModel {
     public void add(Bem bem) {
         bens.add(bem);        
     }        
+    
+    public List<Bem> getList() {
+        return bens;
+    }
 }

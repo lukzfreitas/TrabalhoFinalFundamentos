@@ -27,11 +27,10 @@ public class CadastroLanceFacade {
     
     public Lance adicionar(
             int leilaoId, 
-            String usuarioId, 
-            String data, 
+            String usuarioId,             
             double valor
     ) throws DAOException {
-        Lance lance = new Lance(leilaoId, leilaoId, usuarioId, data, valor);
+        Lance lance = new Lance(leilaoId, usuarioId, valor);
         try {
             boolean ok = dao.adicionar(lance);
             if (ok) {
@@ -54,6 +53,14 @@ public class CadastroLanceFacade {
     public List<Lance> getLancesPorLeilaoID(int leilaoId) throws DAOException {
         try {
             return dao.getLancesPorLeilaoID(leilaoId);
+        } catch (DAOException e) {
+            throw new DAOException("Falha ao buscar todos lances", e);
+        }
+    }
+    
+    public List<Lance> getLancesPorUsuarioID(String usuarioId) throws DAOException {
+        try {
+            return dao.getLancesPorUsuarioID(usuarioId);
         } catch (DAOException e) {
             throw new DAOException("Falha ao buscar todos lances", e);
         }

@@ -30,28 +30,29 @@ public class CadastroBemController {
     private List<String> toListString(List<Bem> listaOrigem) {
         List<String> listaDestino = new ArrayList<String>(listaOrigem.size());
         for (Bem bem : listaOrigem) {
-            listaDestino.add(bem.getDescricao());
+            listaDestino.add(bem.toString());
         }
         return listaDestino;
     }
 
-    public boolean adicionarBem(            
+    public Bem adicionarBem(            
+            int loteId,
             String descricao,
             String detalhes,
             String categoria
     ) throws DAOException {
-        Bem bem = facade.adicionarBem(descricao, detalhes, categoria);
+        Bem bem = facade.adicionarBem(loteId, descricao, detalhes, categoria);
         if (bem != null) {
             model.add(bem);
-            return true;
+            return bem;
         }
-        return false;
+        return null;
     }
 
     public List<String> getTodos() throws DAOException {
         List<String> lista = new ArrayList<String>();
         for (Bem bem : facade.buscarTodos()) {
-            lista.add(bem.getDescricao());
+            lista.add(bem.toString());
         }        
         return lista;
     }

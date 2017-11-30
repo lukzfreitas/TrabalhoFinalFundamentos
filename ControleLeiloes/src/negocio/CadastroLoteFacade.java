@@ -25,8 +25,8 @@ public class CadastroLoteFacade {
         }
     }
 
-    public Lote adicionarLote(int bemId, double valor) throws DAOException {
-        Lote lote = new Lote(bemId, valor);
+    public Lote adicionarLote(double valor) throws DAOException {
+        Lote lote = new Lote(valor);
         try {
             boolean adicionado = dao.adicionar(lote);
             if (adicionado) {

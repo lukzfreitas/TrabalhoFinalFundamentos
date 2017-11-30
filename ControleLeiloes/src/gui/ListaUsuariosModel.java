@@ -10,12 +10,13 @@ import java.util.List;
 import javax.swing.AbstractListModel;
 import negocio.Usuario;
 import negocio.UsuarioPF;
+import negocio.UsuarioPJ;
 
 /**
  *
  * @author Lucas
  */
-public class ListaUsuariosModel {
+public class ListaUsuariosModel extends AbstractListModel<Usuario>{
     
     private List<Usuario> usuarios = new ArrayList<Usuario>();
 
@@ -27,12 +28,24 @@ public class ListaUsuariosModel {
         usuarios.addAll(dados);
     }    
     
+    @Override
     public int getSize() {
         return usuarios.size();
     }
     
+    @Override
     public Usuario getElementAt(int index) {
         return usuarios.get(index);
+    }
+    
+    public String getCpfOuCnpjSelecionado(int index) {
+        if (usuarios.get(index) instanceof UsuarioPF) {
+            UsuarioPF usuarioPF = (UsuarioPF)usuarios.get(index);
+            return usuarioPF.getCpf();
+        } else {
+            UsuarioPJ usuarioPJ = (UsuarioPJ)usuarios.get(index);
+            return usuarioPJ.getCnpj();
+        }
     }
     
     public void add(Usuario usuario) {

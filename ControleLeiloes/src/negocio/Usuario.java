@@ -9,11 +9,16 @@ package negocio;
  *
  * @author Lucas
  */
-public abstract class Usuario {
+public abstract class Usuario {    
     private String nome;
     private String email;
 
     public Usuario(String nome, String email) {
+        this.nome = nome;
+        this.email = email;
+    }
+
+    public Usuario(int usuarioId, String nome, String email) {        
         this.nome = nome;
         this.email = email;
     }
@@ -25,4 +30,10 @@ public abstract class Usuario {
     public String getEmail() {
         return email;
     }
+
+    @Override
+    public String toString() {
+        return " nome: " + nome + ", e-mail: " + email;
+    }    
+    
 }

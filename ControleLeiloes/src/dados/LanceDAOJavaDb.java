@@ -11,7 +11,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import negocio.CadastroLanceDAO;
 import negocio.Lance;
@@ -20,11 +22,11 @@ import negocio.Lance;
  *
  * @author Lucas
  */
-public class LanceDAOJavaDb implements CadastroLanceDAO{
+public class LanceDAOJavaDb implements CadastroLanceDAO {
 
     private static LanceDAOJavaDb ref;
 
-    public static LanceDAOJavaDb getInstance() throws DAOException{
+    public static LanceDAOJavaDb getInstance() throws DAOException {
         if (ref == null) {
             ref = new LanceDAOJavaDb();
         }
@@ -34,18 +36,21 @@ public class LanceDAOJavaDb implements CadastroLanceDAO{
     private LanceDAOJavaDb() {
         try {
             Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
-        } catch (ClassNotFoundException e) {            
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    private static Connection getConnection() throws SQLException {        
+    private static Connection getConnection() throws SQLException {
         return DriverManager.getConnection("jdbc:derby:DB_LEILOES");
     }
 
     @Override
     public boolean adicionar(Lance lance) throws DAOException {
         try {
+            Date agora = new Date(System.currentTimeMillis());
+            SimpleDateFormat formatarData = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String dataFormatada = formatarData.format(agora);
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(
                     "INSERT INTO LANCES (LEILAO_ID_foreign_key, USUARIO_ID, VALOR, DATA) VALUES (?,?,?,?)"
@@ -53,7 +58,7 @@ public class LanceDAOJavaDb implements CadastroLanceDAO{
             stmt.setString(1, Integer.toString(lance.getLeilaoId()));
             stmt.setString(2, lance.getUsuarioId());
             stmt.setString(3, Double.toString(lance.getValor()));
-            stmt.setString(4, lance.getData());
+            stmt.setString(4, dataFormatada);
             int ret = stmt.executeUpdate();
             con.close();
             return (ret > 0);
@@ -72,11 +77,32 @@ public class LanceDAOJavaDb implements CadastroLanceDAO{
             List<Lance> listaLancesDoLeilao = new ArrayList<Lance>();
             while (resultado.next()) {
                 int lance_id = Integer.parseInt(resultado.getString("LANCE_ID"));
-                int leilao_id = Integer.parseInt(resultado.getString("LEILAO_ID_foreign_key"));
                 String usuario_id = resultado.getString("USUARIO_ID");
                 double lance_valor = Double.parseDouble(resultado.getString("VALOR"));
                 String lance_data = resultado.getString("DATA");
                 Lance lance = new Lance(lance_id, leilaoId, usuario_id, lance_data, lance_valor);
+                listaLancesDoLeilao.add(lance);
+            }
+            return listaLancesDoLeilao;
+        } catch (SQLException ex) {
+            throw new DAOException("Falha ao buscar.", ex);
+        }
+    }
+
+    @Override
+    public List<Lance> getLancesPorUsuarioID(String usuarioId) throws DAOException {
+        try {
+            Connection con = getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM LANCES WHERE USUARIO_ID=?");
+            stmt.setString(1, usuarioId);
+            ResultSet resultado = stmt.executeQuery();
+            List<Lance> listaLancesDoLeilao = new ArrayList<Lance>();
+            while (resultado.next()) {
+                int lance_id = Integer.parseInt(resultado.getString("LANCE_ID"));
+                int leilao_id = Integer.parseInt(resultado.getString("LEILAO_ID_foreign_key"));
+                double lance_valor = Double.parseDouble(resultado.getString("VALOR"));
+                String lance_data = resultado.getString("DATA");
+                Lance lance = new Lance(lance_id, leilao_id, usuarioId, lance_data, lance_valor);
                 listaLancesDoLeilao.add(lance);
             }
             return listaLancesDoLeilao;
@@ -105,6 +131,5 @@ public class LanceDAOJavaDb implements CadastroLanceDAO{
         } catch (SQLException ex) {
             throw new DAOException("Falha ao buscar.", ex);
         }
-    }   
-
+    }
 }

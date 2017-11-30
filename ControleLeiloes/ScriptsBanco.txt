@@ -1,43 +1,44 @@
 -- criação das tabelas
-CREATE TABLE USUARIOS_PF(
+
+CREATE TABLE USUARIOS_PF(	
 	CPF CHAR(14) NOT NULL PRIMARY KEY,
-	NOME VARCHAR (100)  NOT NULL,
-	EMAIL VARCHAR (100) NOT NULL
+	NOME VARCHAR (120)  NOT NULL,
+	EMAIL VARCHAR (120) NOT NULL
 );
 
-CREATE TABLE USUARIOS_PJ(
+CREATE TABLE USUARIOS_PJ(	
 	CNPJ CHAR (18) NOT NULL PRIMARY KEY,
-	NOME VARCHAR (100) NOT NULL,
-	EMAIL VARCHAR (100) NOT NULL
+	NOME VARCHAR (120) NOT NULL,
+	EMAIL VARCHAR (120) NOT NULL
+);
+
+CREATE TABLE LOTES(
+	LOTE_ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
+		(START WITH 1, INCREMENT BY 1),	
+	VALOR DOUBLE
 );
 
 CREATE TABLE BENS(
 	BEM_ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
         (START WITH 1, INCREMENT BY 1),
-	DESCRICAO VARCHAR(500) NOT NULL,
-	DETALHES VARCHAR(500),
-	CATEGORIA VARCHAR(100)
-);
-
-CREATE TABLE LOTES(
-	LOTE_ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
-		(START WITH 1, INCREMENT BY 1),
-	BEM_ID_foreign_key INTEGER NOT NULL,
-	CONSTRAINT BEM_ID FOREIGN KEY (BEM_ID_foreign_key) REFERENCES BENS(BEM_ID),
-	VALOR DOUBLE
+	LOTE_ID_foreign_key INTEGER NOT NULL,
+	CONSTRAINT LOTE_ID_BEM FOREIGN KEY (LOTE_ID_foreign_key) REFERENCES LOTES(LOTE_ID),
+	DESCRICAO VARCHAR(800) NOT NULL,
+	DETALHES VARCHAR(800),
+	CATEGORIA VARCHAR(120)
 );
 
 CREATE TABLE LEILOES(
 	LEILAO_ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY
 		(START WITH 1, INCREMENT BY 1),
-	LOTE_ID_foreign_key INTEGER NOT NULL,
-	CONSTRAINT LOTE_ID FOREIGN KEY (LOTE_ID_foreign_key) REFERENCES LOTES(LOTE_ID),
+	LOTE_ID_LEILAO_foreign_key INTEGER NOT NULL,
+	CONSTRAINT LOTE_ID_LEILAO FOREIGN KEY (LOTE_ID_LEILAO_foreign_key) REFERENCES LOTES(LOTE_ID),
 	DATA_INICIO TIMESTAMP NOT NULL, 
 	DATA_FIM TIMESTAMP NOT NULL, 
 	ARREMATE DOUBLE,
-	VENCEDOR CHAR(18),
-	TIPO CHAR(18) NOT NULL,
-	TIPO_LANCE CHAR(18) NOT NULL
+	VENCEDOR CHAR(20),
+	TIPO CHAR(20) NOT NULL,
+	TIPO_LANCE CHAR(20) NOT NULL
 );
 
 CREATE TABLE LANCES(
@@ -45,258 +46,229 @@ CREATE TABLE LANCES(
 		(START WITH 1, INCREMENT BY 1),
 	LEILAO_ID_foreign_key INTEGER NOT NULL,
 	CONSTRAINT LEILAO_ID FOREIGN KEY (LEILAO_ID_foreign_key) REFERENCES LEILOES(LEILAO_ID),
-	USUARIO_ID CHAR(18),
+	USUARIO_ID CHAR(20),
 	VALOR DOUBLE NOT NULL,
 	DATA TIMESTAMP NOT NULL
 );
 
--- população DB Tabela USUARIOS_PF
+-- população da Tabela USUARIOS_PF
 
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('123.456.789-10', 'Junior', 'junior@naofezotrabalho.com');
+VALUES('500.146.710-18', 'Leia', 'leia_organa_solo@starkiller.com');
 
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('122.456.789-10', 'Joao', 'john@naofezotrabalho.com');
+VALUES('200.145.710-18', 'Chewbacca', 'chewie_bigguy@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('133.456.789-10', 'Pedro', 'peter@naofezotrabalho.com');
+VALUES('500.147.710-18', 'Poe', 'poe_dameron@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('144.456.789-10', 'Matheus', 'matheusinha@naofezotrabalho.com');
+VALUES('300.146.712-18', 'Han', 'han_dono_da_millenium_falcon@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('155.456.789-10', 'Jesus', 'amem@naofezotrabalho.com');
+VALUES('500.146.710-20', 'Jairo', 'jairo_thecow@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('166.456.789-10', 'Thiago', 'thiago@naofezotrabalho.com');
+VALUES('450.146.710-18', 'Oscar', 'oscarisaac@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('177.456.789-10', 'Pitagoras', 'supletivo@naofezotrabalho.com');
+VALUES('598.146.710-18', 'Clebinho', 'theDog@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('188.456.789-10', 'Baskara', 'menosb@naofezotrabalho.com');
+VALUES('500.146.658-18', 'Abraham', 'the_president@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('199.456.789-10', 'Platao', 'plato@naofezotrabalho.com');
+VALUES('500.200.710-18', 'Charles', 'evolution_is_a_fact@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('200.456.789-10', 'James', 'james_007@naofezotrabalho.com');
+VALUES('100.146.710-18', 'Bond', 'james_bond@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('201.456.789-10', 'Neymar', 'ousadiaealegria@naofezotrabalho.com');
+VALUES('500.146.899-18', 'Harry', 'the_boy_who_lived@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('202.456.789-10', 'Ronaldo', 'ronaldo@naofezotrabalho.com');
+VALUES('666.666.666-66', 'Capiroto', 'eldiablo@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('203.456.789-10', 'Romario', 'riomario@naofezotrabalho.com');
+VALUES('555.212.121-12', 'Seu Darth', 'darthvader@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('204.456.789-10', 'Cynthya', 'cynthya@naofezotrabalho.com');
+VALUES('500.146.895-18', 'Camila', 'thegirl@starkiller.com');
  
 INSERT INTO USUARIOS_PF(CPF, NOME, EMAIL)
-VALUES('205.456.789-00', 'Marilene', 'merilene@naofezotrabalho.com');
+VALUES('050.146.710-18', 'Lucas', 'theboy@starkiller.com');
 
--- população DB Tabela USUARIOS_PJ
+-- população da Tabela USUARIOS_PJ
 
 INSERT INTO USUARIOS_PJ(CNPJ, NOME, EMAIL)
-VALUES('20.588.666.0001-10', 'balao da informatica', 'balao@balaodainformatica.com');
+VALUES('82.631.107.0001-00', 'Avengers', 'avengers@avengers.com');
  
 INSERT INTO USUARIOS_PJ(CNPJ, NOME, EMAIL)
-VALUES('20.546.627.0001-10', 'moveis kikasa', 'kikasa@kikasamoveis.com');
+VALUES('82.631.200.0001-00', 'Gemialidades Wesley', 'fredwesley@gemialidadeswesley.com');
  
 INSERT INTO USUARIOS_PJ(CNPJ, NOME, EMAIL)
-VALUES('20.146.613.0001-10', 'construcao', 'construcao@construcao.com');
+VALUES('89.631.107.0001-00', 'BlockBuster', 'blockbuster@netflix.com');
  
 INSERT INTO USUARIOS_PJ(CNPJ, NOME, EMAIL)
-VALUES('20.986.654.0001-10', 'esportes esportivos', 'contato@esportesesportivos.com');
+VALUES('66.666.666.0001-66', 'Pinacoteca', 'pinacoteca@pinacoteca.com');
  
 INSERT INTO USUARIOS_PJ(CNPJ, NOME, EMAIL)
-VALUES('20.982.735.0001-10', 'Games FarOll', 'noreply@faroll.com');
+VALUES('22.121.125.0001-10', 'All Games', 'games@allg.com');
  
 INSERT INTO USUARIOS_PJ(CNPJ, NOME, EMAIL)
-VALUES('23.672.745.0001-10', 'Magazine da Casa', 'noreply@magazinedacasa.com');
+VALUES('82.100.300.0001-00', 'Móveis de Kasa', 'kmoveis@kmoveis.com');
 
--- população DB Tabela BEM
 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('SmarTv LED 55', 'Smart TV LED 55" Full HD LG 55LJ5550 com Painel IPS Wi-Fi WebOS', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Speaker/Powerbank', 'Acessório Speaker/Powerbank Rock in Rio', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Soundbar JBL', 'Soundbar JBL Cinema SB150 2.1 Canais 150W Bluetooth com Subwoofer', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Caixa de Som Bluetooth', 'Caixa de Som Bluetooth Harman Kardon Onyx Mini Azul', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Mini Syste', 'Mini System Philips NTX600X/78 com MP3 Bluetooth Duplo USB e Ripping – 2.200 W', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Home Theater Philips', 'Home Theater Philips Fidelio E5 CSS7235Y/12 4.1 Canais com Caixas Traseiras Wireless, Bluetooth', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('iPhone SE', 'Smartphone iPhone SE Apple 64GB Prateado 4G Tela 4" Retina Câm 12MP iOS 10', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Samsung Galaxy A5', 'Smartphone Samsung Galaxy A5 Dual Chip Android 6.0 Tela 5.2" Octa-Core 1.9GHz 32GB 4G Câmera 16MP', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Zenfone 3', 'Zenfone 3 Max Cinza Asus, com Tela de 5,5", 4G, 32 GB e Câmera de 16 MP', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Drone', 'Sky Storm Drone com Gyro - Candide', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Tablet/Reader Lev', 'Lev Fit', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('iPhone 7', 'Apple iPhone 7 Plus 32GB Desbloqueado Preto Matte', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Fone de Ouvido Sony', 'Fone de Ouvido Sony Headphone Preto', 'eletrônicos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Camiseta NBA', 'Roupas - NBA', 'esportes');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Tênis adidas', 'Tênis adidas Duramo 8 Azul', 'esportes');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Jogo Bingo Drink', 'Jogo Bingo Ludi Drink da Vez', 'diversos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Relógio Masculino', 'Relógio Masculino Analógico Champion', 'diversos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Panela de Pressão', 'Panela de Pressão de Alumínio Polido com Capacidade de 4,5L Turbo Top, com Janela de Segurança', 'diversos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Panela 3 em 1', 'Panela 3 em 1 Tramontina Paris', 'diversos');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Cama Box + Colchão ', 'Cama Box + Colchão Millenium Bambu King Size Mola Ensacada c/Tecido Jacquard 1,93 x 2,03cm', 'móveis e decoração');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Liquidificador Mondial', 'Liquidificador Mondial Premium Black L1000 com 12 Velocidades e 1000W', 'eletrodoméstico');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Fritadeira Sem Óleo', 'Fritadeira Sem Óleo Mondial Air Fryer Digital Premium AF-02 2 Litros', 'eletrodoméstico');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Fogão 4 bocas', 'Fogão Piso 4 Bocas Atlas Acendimento Automático Glass Preto Bivolt', 'eletrodoméstico');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Batedeira', 'Batedeira Philco Power Chef com 6 Velocidades', 'eletrodoméstico');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Aspirador de Pó', 'Aspirador de Pó 800W de Potência, 1L de Capacidade, Reservatório Removível e Lavável, 2 Tubos Prolongadores', 'eletrodoméstico');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Ventilador de Mesa', 'Ventilador de Mesa Princesas Turbo Silêncio Mallory - 30 cm com 4 Pás, 42W de Potência, 3 Velocidades', 'eletrodoméstico');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Mochila', 'Mochila Speedo Braid', 'esportes');
+-- população da Tabela LOTE
 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Xtreme Whey 5 Lbs', 'Xtreme Whey 5 Lbs - Bio Sport USA', 'esportes');
+INSERT INTO LOTES(VALOR)
+VALUES(10000.00);
 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Bicicleta Aro 24', 'Bicicleta Aro 24 Caloi - Ceci', 'esportes');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Bicicleta Aro 26', 'Bicicleta Aro 26 Vivid - Houston', 'esportes');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Super Whey 100%', 'Super Whey 100% Concentrado 907g - Integralmédica', 'esportes');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Monitor cardiaco', 'Monitor cardiaco Guga GK6100 - Kikos', 'esportes');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Call of Duty Advanced Warfare', 'Jogo Call of Duty Advanced Warfare: Gold Edition - Xbox One', 'games');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Volante Gamer G29', 'Volante Gamer G29 - PS4 PS3 e PC - Logitech', 'games');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Dying Light', 'Game Dying Light: Enhanced Edition - PS4', 'games');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Metal Gear Solid V', 'Game - Metal Gear Solid V: The Definitive Experience - PS4', 'games');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Nioh', 'Game Nioh - PS4', 'games');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Jogo For Honor', 'Jogo For Honor Limited Edition - Xbox One', 'games');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Notebook DELL Inspiron Gaming Edition', 'Notebook DELL Inspiron Gaming Edition i15-7559-a10 Intel® Core i5 8GB (GeForce GTX 960M de 4GB) 1TB 8GB SSD Tela 15.6', 'Informática');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Multifuncional Canon', 'Multifuncional Canon Tanque de tinta com Wi-Fi - G3100', 'Informática');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Processador Intel Core i7 6950X', 'Processador Intel Core i7 6950X Extreme Edition 3.5GHz 25MB LGA2011-3', 'Informática');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Notebook Samsung Essentials E21', 'Notebook Samsung Essentials E21 Intel Dual Core 4GB 500GB LED FULL HD 15,6" Windows 10', 'Informática');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Monitor LED 21.5', 'Monitor LED 21.5'' Samsung Wide S22E310 Full HD HDMI', 'Informática');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Penteadeira 2 Portas', 'Penteadeira 2 Portas com Espelho Atração', 'móveis e decoração');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Cadeira Para Escritório', 'Cadeira Para Escritório Carrefour Home Preta Ml-2431-2', 'móveis e decoração');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Poltrona Colorida Inflável', 'Poltrona Colorida Jilong com Encosto de Braço Inflável com Válvula de Retenção de Ar', 'móveis e decoração');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Sofá', 'Sofá | Estofado Sportage 3 lugares em Tecido Sued Marrom Serrano - Somopar', 'móveis e decoração');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Rack com Painel', 'Rack com Painel Gallardo MDF/MDP Amarelo Brilho - Madetec', 'móveis e decoração');
- 
-INSERT INTO BENS(DESCRICAO, DETALHES, CATEGORIA)
-VALUES('Esteira para Braço de Sofá', 'Esteira para Braço de Sofá Flexível com Porta Copos Vermelha - Cia Laser', 'móveis e decoração');
+INSERT INTO LOTES(VALOR)
+VALUES(500.00);
 
--- população DB Tabela LOTE
+INSERT INTO LOTES(VALOR)
+VALUES(690.99);
 
-INSERT INTO LOTES(BEM_ID_foreign_key, VALOR)
-VALUES(037, 104.45);
+INSERT INTO LOTES(VALOR)
+VALUES(457.58);
 
-INSERT INTO LOTES(BEM_ID_foreign_key, VALOR)
-VALUES(046, 340.00);
+INSERT INTO LOTES(VALOR)
+VALUES(666.66);
 
-INSERT INTO LOTES(BEM_ID_foreign_key, VALOR)
-VALUES(002, 87);
+INSERT INTO LOTES(VALOR)
+VALUES(5000.50);
 
-INSERT INTO LOTES(BEM_ID_foreign_key, VALOR)
-VALUES(001, 1965);
+INSERT INTO LOTES(VALOR)
+VALUES(33.50);
 
-INSERT INTO LOTES(BEM_ID_foreign_key, VALOR)
-VALUES(030, 199.90);
+-- população da Tabela BEM
 
--- população DB Tabela LEILAO
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Orelhas Extensíveis', 'Ideal para ouvir através da porta', 'artigos mágicos');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Uniforme Capitão América - filme 1', 'Uniforme usado pelo capitão na segunda guerra mundial', 'esportes');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, '...E o vento levou', 'Fita VHS do filme', 'filmes');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'The Witcher Wild Hunt', 'Jogo para PS4', 'games');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Lightsaber', 'Lightsaber que pertenceu ao Darth Vader quando ele era Anakin Skywalker', 'eletrônicos');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Uniforme Stormtropper', 'Uniforme utilizado pelos stormtroppers', 'esportes');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Mesa de jantar', 'Mesa de jantar com quatro lugares', 'móveis');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Kit Mata-Aula', 'Poções que ajudam você a se livrar daquela aula chata', 'artigos mágicos');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Star Wars: Episódio I - A Ameaça Fantasma', 'DVD do primeiro episódio dos filmes da saga Star Wars', 'filmes');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Star Wars Episódio II: Ataque dos Clones', 'DVD do segundo episódio dos filmes da saga Star Wars', 'filmes');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Star Wars Episódio III: A Vingança dos Sith', 'DVD do terceiro episódio dos filmes da saga Star Wars', 'filmes');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Rogue One', 'DVD do filme que faz parte da saga Star Wars', 'filmes');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Star Wars Episódio IV: Uma Nova Esperança', 'DVD do quarto episódio dos filmes da saga Star Wars', 'filmes');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Star Wars Episódio V: O Império Contra-Ataca', 'DVD do quinto episódio dos filmes da saga Star Wars', 'filmes');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Star Wars Episódio VI: O Retorno de Jedi', 'DVD do sexto episódio dos filmes da saga Star Wars', 'filmes');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(001, 'Star Wars Episódio VII: O Despertar da Força', 'DVD do setimo episódio dos filmes da saga Star Wars', 'filmes');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(002, 'Assassins Creed Origins', 'Jogo para X-Box One', 'games');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(002, 'Star Wars Battlefront II', 'Jogo para PS4', 'games');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(003, 'Guarda Roupa', 'Guarda Roupa Casal com Espelho 3 Portas de Correr Smart Siena Móveis Branco', 'móveis');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(004, 'Sofá 4 Lugares', 'Sofá 4 Lugares Connect Retrátil e Reclinável Suede Amassado Preto - Rifletti', 'móveis');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(004, 'Cafeteira Expresso Arno', 'Cafeteira Expresso Arno Nescafé Dolce Gusto Mini Me 15 Bar Automática - Preto', 'eletroportáteis');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(004, 'Panela de Pressão Elétrica', 'Panela de Pressão Elétrica Philips Walita Linha Daily Collection RI3103/7 - 5 Litros c/timer', 'eletroportáteis');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(005, 'Cooktop', 'Cooktop Brastemp Gourmand 4 Bocas Vitroceramico Preto Indução Eletrico', 'eletrodoméstico');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(005, 'Geladeira', 'Geladeira / Refrigerador Electrolux Side by Side Frost Free SS72X 504 Litros', 'eletrodoméstico');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(005, 'Notebook Samsung', 'Notebook Samsung Expert X23 Intel Core I5 8GB (GeForce 910M de 2GB) 1TB Tela 15,6'' LED HD Windows 10 - Preto', 'informática');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(006, 'Smart TV LED 49" Samsung', 'Smart TV LED 49" Samsung 49MU6100 UHD 4K HDR Premium com Conversor Digital 3 HDMI 2 USB 120Hz', 'eletrodoméstico');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(006, 'Console PS4', 'Console PS4 500GB Hits Bundle + 3 Jogos + Controle Wireless DualShock 4 - Sony', 'games');
+
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(006, 'Smartphone Samsung Galaxy S6', 'Smartphone Samsung Galaxy S6 Desbloqueado Android 5.0 Processador Octa-Core Tela Amoled 5.1` 32gb Wi-Fi 4g Câmera De 16mp - Dourado', 'celulares');
+
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(006, 'Smartphone Samsung Galaxy S7', 'Smartphone Samsung Galaxy S7 Android 6.0 Tela 5.1" 32GB 4G Câmera 12MP - Dourado', 'celulares');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(006, 'Smartphone Samsung Galaxy S8', 'Smartphone Samsung Galaxy S8 Dual Chip Android 7.0 Tela 5.8" Octa-Core 2.3GHz 64GB 4G Câmera 12MP - Preto', 'celulares');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(006, 'Call Of Duty WWII', 'Jogo Call Of Duty WWII para X-box one', 'games');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(007, 'Console New Nintendo', 'Console New Nintendo 3ds Xl Galaxy Style', 'games');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(007, 'Smartphone Samsung Galaxy J7', 'Smartphone Samsung Galaxy J7 Metal Dual Chip Android 6.0 Tela 5.5" 16GB 4G Câmera 13MP - Preto', 'celulares');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(007, 'HD Externo Portátil Samsung', 'HD Externo Portátil Samsung M3 Portable 1TB Preto', 'informática');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(007, 'Google Chromecast 2', 'Leve e portátil, o eletrônico promete transformar televisores em Smart TVs com acesso a Internet e serviços como Netflix, YouTube e Spotify.', 'Informática');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(007, 'Home Theater', 'Home Theater Blu-Ray 3D Samsung HT-F4505 500W 5.1 Canais Full HD HDMI USB Rádio FM', 'eletrônicos');
+ 
+INSERT INTO BENS(LOTE_ID_foreign_key, DESCRICAO, DETALHES, CATEGORIA)
+VALUES(007, 'Cama Box', 'Cama Box Conjugado Casal Ortobom Union Estrutura Ortopédica', 'móveis');
+
+
+-- população da Tabela LEILAO
 -- yyyy-mm-dd hh:mm:ss
-INSERT INTO LEILOES(LOTE_ID_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
-VALUES(001, '2017-06-11 20:40:00', '2017-06-29 20:40:00', 1234, '20.588.666.0001-10','Oferta','Aberto');
+INSERT INTO LEILOES(LOTE_ID_LEILAO_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
+VALUES(001, '2017-11-11 14:40:00', '2017-08-22 18:40:00', 1202, '82.631.107.0001-00','Oferta','Aberto');
  
-INSERT INTO LEILOES(LOTE_ID_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
-VALUES(002, '2017-06-06 21:40:00', '2017-07-02 20:30:00', 2345, '199.456.789-10','Demanda','Aberto');
+INSERT INTO LEILOES(LOTE_ID_LEILAO_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
+VALUES(002, '2017-11-12 16:40:00', '2017-02-12 18:30:00', 1204, '598.146.710-18','Demanda','Aberto');
  
-INSERT INTO LEILOES(LOTE_ID_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
-VALUES(003, '2017-06-06 17:40:00', '2017-07-10 20:00:00', 9486, '200.456.789-10','Oferta','Aberto');
+INSERT INTO LEILOES(LOTE_ID_LEILAO_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
+VALUES(003, '2017-11-06 09:40:00', '2018-01-10 18:40:00', 0, '','Oferta','Aberto');
 
-INSERT INTO LEILOES(LOTE_ID_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
-VALUES(004, '2018-01-01 17:40:00', '2018-01-10 20:00:00', 9486, '200.456.789-10','Oferta','Aberto');
+INSERT INTO LEILOES(LOTE_ID_LEILAO_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
+VALUES(004, '2017-10-25 11:40:00', '2018-04-10 18:00:00', 0, '','Demanda','Aberto');
 
-INSERT INTO LEILOES(LOTE_ID_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
-VALUES(005, '2018-01-01 17:40:00', '2018-01-10 20:00:00', 9486, '200.456.789-10','Oferta','Aberto');
- 
+INSERT INTO LEILOES(LOTE_ID_LEILAO_foreign_key, DATA_INICIO, DATA_FIM, ARREMATE, VENCEDOR, TIPO, TIPO_LANCE)
+VALUES(005, '2017-10-24 10:30:00', '2018-02-12 18:30:00', 0, '','Oferta','Aberto');

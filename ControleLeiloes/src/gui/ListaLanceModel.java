@@ -7,13 +7,14 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.AbstractListModel;
 import negocio.Lance;
 
 /**
  *
  * @author Lucas
  */
-public class ListaLanceModel {
+public class ListaLanceModel extends AbstractListModel<Lance>{
 
     private List<Lance> lances = new ArrayList<Lance>();
 
@@ -25,10 +26,12 @@ public class ListaLanceModel {
         lances.addAll(dados);
     }
 
+    @Override
     public int getSize() {
         return lances.size();
     }
 
+    @Override
     public Lance getElementAt(int index) {
         return lances.get(index);
     }

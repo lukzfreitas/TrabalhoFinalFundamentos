@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -25,6 +26,7 @@ public class TelaInicial extends javax.swing.JFrame {
      */
     public TelaInicial() {
         initComponents();
+        this.setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -43,24 +45,45 @@ public class TelaInicial extends javax.swing.JFrame {
         leiloesEncerrados = new javax.swing.JList();
         leilaoEncerrado = new javax.swing.JLabel();
         cadastrarLeilao = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        detalhesLeilao = new javax.swing.JButton();
-        cadastrarBens = new javax.swing.JButton();
-        cadastrarLotes = new javax.swing.JButton();
+        encerrarLeilao = new javax.swing.JButton();
         cadastrarLance = new javax.swing.JButton();
         popularBanco = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listaDeUsuario = new javax.swing.JList();
+        jLabel1 = new javax.swing.JLabel();
+        cadastrarUsuario = new javax.swing.JButton();
+        atualizarLeiloesAndamento = new javax.swing.JButton();
+        atualizarLeiloesEncerrados = new javax.swing.JButton();
+        atualizarUsuarios = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        lancesDeLeilao = new javax.swing.JList();
+        Lances = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        lancesDeUsuario = new javax.swing.JList();
+        jLabel2 = new javax.swing.JLabel();
+        atualizarLancesLeilao = new javax.swing.JButton();
+        atualizarLancesUsuario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setViewportView(leiloesEmAndamento);
 
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 92, 440, 220));
+
         leilaoAndamento.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        leilaoAndamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         leilaoAndamento.setText("Leilões em andamento");
+        getContentPane().add(leilaoAndamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 52, 440, -1));
 
         jScrollPane2.setViewportView(leiloesEncerrados);
 
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 430, 220));
+
         leilaoEncerrado.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        leilaoEncerrado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         leilaoEncerrado.setText("Leilões encerrados");
+        getContentPane().add(leilaoEncerrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 430, -1));
 
         cadastrarLeilao.setText("Cadastrar Leilão");
         cadastrarLeilao.addActionListener(new java.awt.event.ActionListener() {
@@ -68,90 +91,110 @@ public class TelaInicial extends javax.swing.JFrame {
                 cadastrarLeilaoActionPerformed(evt);
             }
         });
+        getContentPane().add(cadastrarLeilao, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 350, 120, 40));
 
-        jButton1.setText("Encerrar Leilão");
+        encerrarLeilao.setText("Encerrar Leilão");
+        encerrarLeilao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                encerrarLeilaoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(encerrarLeilao, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 120, 40));
 
-        detalhesLeilao.setText("Detalhes Leilão");
+        cadastrarLance.setText("Dar Lance");
+        cadastrarLance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarLanceActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cadastrarLance, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 350, 120, 40));
 
-        cadastrarBens.setText("Cadastrar Bens");
-
-        cadastrarLotes.setText("Cadastrar Lotes");
-
-        cadastrarLance.setText("Cadastrar Lance");
-
-        popularBanco.setText("Popoluar Banco de Dados");
+        popularBanco.setText("Popular Banco de Dados");
         popularBanco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 popularBancoActionPerformed(evt);
             }
         });
+        getContentPane().add(popularBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(leilaoAndamento)
-                        .addGap(124, 124, 124)
-                        .addComponent(leilaoEncerrado))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(108, 108, 108)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cadastrarLeilao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cadastrarBens, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cadastrarLotes, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(detalhesLeilao, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cadastrarLance, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(popularBanco)))
-                .addContainerGap(415, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(popularBanco, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(leilaoAndamento)
-                    .addComponent(leilaoEncerrado))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cadastrarLeilao, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(detalhesLeilao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cadastrarBens, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cadastrarLotes, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cadastrarLance, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
-        );
+        jScrollPane3.setViewportView(listaDeUsuario);
+
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 90, 420, 220));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Lista de Usuários");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 50, 420, -1));
+
+        cadastrarUsuario.setText("Cadastrar Usuário");
+        cadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cadastrarUsuarioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cadastrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 350, -1, 40));
+
+        atualizarLeiloesAndamento.setText("Atualizar");
+        atualizarLeiloesAndamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarLeiloesAndamentoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(atualizarLeiloesAndamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+
+        atualizarLeiloesEncerrados.setText("Atualizar");
+        atualizarLeiloesEncerrados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarLeiloesEncerradosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(atualizarLeiloesEncerrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 320, -1, -1));
+
+        atualizarUsuarios.setText("Atualizar");
+        atualizarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarUsuariosActionPerformed(evt);
+            }
+        });
+        getContentPane().add(atualizarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 320, -1, -1));
+
+        jScrollPane4.setViewportView(lancesDeLeilao);
+
+        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 530, 210));
+
+        Lances.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        Lances.setText("Lances do Leilão");
+        getContentPane().add(Lances, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
+
+        jScrollPane5.setViewportView(lancesDeUsuario);
+
+        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, 510, 210));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Lances do Usuário");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 410, -1, -1));
+
+        atualizarLancesLeilao.setText("Atualizar");
+        atualizarLancesLeilao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarLancesLeilaoActionPerformed(evt);
+            }
+        });
+        getContentPane().add(atualizarLancesLeilao, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 660, -1, -1));
+
+        atualizarLancesUsuario.setText("Atualizar");
+        atualizarLancesUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarLancesUsuarioActionPerformed(evt);
+            }
+        });
+        getContentPane().add(atualizarLancesUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 660, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastrarLeilaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarLeilaoActionPerformed
-        
+        new TelaLeiloes().setVisible(true);
     }//GEN-LAST:event_cadastrarLeilaoActionPerformed
 
     private void popularBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popularBancoActionPerformed
@@ -163,24 +206,117 @@ public class TelaInicial extends javax.swing.JFrame {
             Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
         CadastroLeilaoController leilaoController;
+        CadastroUsuarioController usuarioController;
         try {
             leilaoController = new CadastroLeilaoController();
-            DefaultListModel model = new DefaultListModel();
-            for (String leilaoAtivo : leilaoController.getAtivos()) {
-                model.addElement(leilaoAtivo);
-            }
-            leiloesEmAndamento.setModel(model);
-            model = new DefaultListModel();
-            for (String leilaoEncerrado : leilaoController.getEncerrados()) {
-                model.addElement(leilaoEncerrado);
-            }            
-            leiloesEncerrados.setModel(model);
+            ListaLeilaoModel leilaoAtivosModel = new ListaLeilaoModel(leilaoController.getAtivos());
+            leiloesEmAndamento.setModel(leilaoAtivosModel);
+            ListaLeilaoModel leilaoEncerradosModel = new ListaLeilaoModel(leilaoController.getEncerrados());
+            leiloesEncerrados.setModel(leilaoEncerradosModel);
+            usuarioController = new CadastroUsuarioController();
+            ListaUsuariosModel usuariosModel = new ListaUsuariosModel(usuarioController.getTodos());
+            listaDeUsuario.setModel(usuariosModel);
         } catch (DAOException ex) {
             Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_popularBancoActionPerformed
+
+    private void cadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarUsuarioActionPerformed
+        new TelaUsuarios().setVisible(true);
+    }//GEN-LAST:event_cadastrarUsuarioActionPerformed
+
+    private void atualizarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarUsuariosActionPerformed
+        CadastroUsuarioController usuarioController;
+        try {
+            usuarioController = new CadastroUsuarioController();
+            ListaUsuariosModel usuariosModel = new ListaUsuariosModel(usuarioController.getTodos());
+            listaDeUsuario.setModel(usuariosModel);
+        } catch (DAOException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_atualizarUsuariosActionPerformed
+
+    private void atualizarLeiloesAndamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarLeiloesAndamentoActionPerformed
+        CadastroLeilaoController leilaoController;
+        try {
+            leilaoController = new CadastroLeilaoController();
+            ListaLeilaoModel leilaoModel = new ListaLeilaoModel(leilaoController.getAtivos());
+            leiloesEmAndamento.setModel(leilaoModel);
+        } catch (DAOException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_atualizarLeiloesAndamentoActionPerformed
+
+    private void atualizarLeiloesEncerradosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarLeiloesEncerradosActionPerformed
+        CadastroLeilaoController leilaoController;
+        try {
+            leilaoController = new CadastroLeilaoController();
+            ListaLeilaoModel leilaoModel = new ListaLeilaoModel(leilaoController.getEncerrados());
+            leiloesEncerrados.setModel(leilaoModel);
+        } catch (DAOException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_atualizarLeiloesEncerradosActionPerformed
+
+    private void encerrarLeilaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encerrarLeilaoActionPerformed
+        int index = leiloesEmAndamento.getSelectedIndex();
+        ListaLeilaoModel model = (ListaLeilaoModel) leiloesEmAndamento.getModel();
+        System.out.println();
+    }//GEN-LAST:event_encerrarLeilaoActionPerformed
+
+    private void cadastrarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarLanceActionPerformed
+        CadastroLanceController lanceController;
+        int leilaoIndex = leiloesEmAndamento.getSelectedIndex();
+        ListaLeilaoModel leilaoModel = (ListaLeilaoModel) leiloesEmAndamento.getModel();
+        int leilaoId = leilaoModel.getElementAt(leilaoIndex).getLeilaoId();
+
+        int usuarioIndex = listaDeUsuario.getSelectedIndex();
+        ListaUsuariosModel usuariosModel = (ListaUsuariosModel) listaDeUsuario.getModel();
+        String usuarioId = usuariosModel.getCpfOuCnpjSelecionado(usuarioIndex);
+        double valor = Double.parseDouble(
+                JOptionPane.showInputDialog(this, "Informe o valor do lance:"));
+        try {
+            lanceController = new CadastroLanceController();
+            lanceController.adicionar(leilaoId, usuarioId, valor);
+        } catch (DAOException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_cadastrarLanceActionPerformed
+
+    private void atualizarLancesLeilaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarLancesLeilaoActionPerformed
+        int index = leiloesEmAndamento.getSelectedIndex();
+        ListaLeilaoModel leilaoModel = (ListaLeilaoModel) leiloesEmAndamento.getModel();
+        int leilaoId = leilaoModel.getElementAt(index).getLeilaoId();
+        CadastroLanceController lanceController;
+        try {
+            lanceController = new CadastroLanceController();
+            ListaLanceModel lanceModel = new ListaLanceModel(lanceController.getLancesPorLeilaoID(leilaoId));
+            lancesDeLeilao.setModel(lanceModel);
+        } catch (DAOException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_atualizarLancesLeilaoActionPerformed
+
+    private void atualizarLancesUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarLancesUsuarioActionPerformed
+        int index = listaDeUsuario.getSelectedIndex();
+        ListaUsuariosModel usuariosModel = (ListaUsuariosModel) listaDeUsuario.getModel();
+        String usuarioId = usuariosModel.getCpfOuCnpjSelecionado(index);
+        CadastroLanceController lanceController;
+        try {
+            lanceController = new CadastroLanceController();
+            ListaLanceModel lanceModel = new ListaLanceModel(lanceController.getLancesPorUsuarioID(usuarioId));            
+            lancesDeUsuario.setModel(lanceModel);
+        } catch (DAOException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_atualizarLancesUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,18 +354,30 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cadastrarBens;
+    private javax.swing.JLabel Lances;
+    private javax.swing.JButton atualizarLancesLeilao;
+    private javax.swing.JButton atualizarLancesUsuario;
+    private javax.swing.JButton atualizarLeiloesAndamento;
+    private javax.swing.JButton atualizarLeiloesEncerrados;
+    private javax.swing.JButton atualizarUsuarios;
     private javax.swing.JButton cadastrarLance;
     private javax.swing.JButton cadastrarLeilao;
-    private javax.swing.JButton cadastrarLotes;
-    private javax.swing.JButton detalhesLeilao;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton cadastrarUsuario;
+    private javax.swing.JButton encerrarLeilao;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JList lancesDeLeilao;
+    private javax.swing.JList lancesDeUsuario;
     private javax.swing.JLabel leilaoAndamento;
     private javax.swing.JLabel leilaoEncerrado;
     private javax.swing.JList leiloesEmAndamento;
     private javax.swing.JList leiloesEncerrados;
+    private javax.swing.JList listaDeUsuario;
     private javax.swing.JButton popularBanco;
     // End of variables declaration//GEN-END:variables
 }

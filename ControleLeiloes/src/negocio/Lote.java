@@ -10,27 +10,21 @@ package negocio;
  * @author Lucas
  */
 public class Lote {
-    private int loteId, bemId;
+    private int loteId;
     private double valor;
 
-    public Lote(int loteId, int bemId, double valor) {
-        this.loteId = loteId;
-        this.bemId = bemId;
+    public Lote(int loteId, double valor) {
+        this.loteId = loteId;        
         this.valor = valor;
     }
 
-    public Lote(int bemId, double valor) {
-        this.bemId = bemId;
+    public Lote(double valor) {        
         this.valor = valor;
     }
 
     public int getLoteId() {
         return loteId;
-    }
-
-    public int getBemId() {
-        return bemId;
-    }
+    }   
 
     public double getValor() {
         return valor;

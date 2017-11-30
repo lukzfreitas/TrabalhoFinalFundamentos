@@ -37,30 +37,6 @@ public class BemDAOJavaDb implements CadastroBemDAO {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-//        try {
-//            createDB();
-//        } catch (Exception ex) {
-//            System.out.println("Problemas para criar o banco: " + ex.getMessage());
-//            System.exit(0);
-//        }
-    }
-
-    private static void createDB() throws DAOException {
-        try {
-            Connection con = DriverManager.getConnection("jdbc:derby:DB_LEILOES;create=true");
-            Statement sta = con.createStatement();
-            String sql = "CREATE TABLE BENS ("
-                    + "BEM_ID INTEGER NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),"
-                    + "DESCRICAO VARCHAR(50) NOT NULL,"
-                    + "DETALHES CHAR(100) NOT NULL,"
-                    + "CATEGORIA VARCHAR(50) NOT NULL"
-                    + ")";
-            sta.executeUpdate(sql);
-            sta.close();
-            con.close();
-        } catch (SQLException ex) {
-            throw new DAOException(ex.getMessage());
-        }
     }
 
     private static Connection getConnection() throws SQLException {
@@ -72,14 +48,16 @@ public class BemDAOJavaDb implements CadastroBemDAO {
             Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement(
                     "INSERT INTO BENS ("
+                    + "LOTE_ID_foreign_key,"
                     + "DESCRICAO, "
                     + "DETALHES,"
                     + "CATEGORIA)"
-                    + " VALUES (?,?,?)"
+                    + " VALUES (?,?,?,?)"
             );
-            stmt.setString(1, bem.getDescricao());
-            stmt.setString(2, bem.getDetalhes());
-            stmt.setString(3, bem.getCategoria());
+            stmt.setInt(1, bem.getLoteId());
+            stmt.setString(2, bem.getDescricao());
+            stmt.setString(3, bem.getDetalhes());
+            stmt.setString(4, bem.getCategoria());
             int ret = stmt.executeUpdate();
             con.close();
             return (ret > 0);
@@ -96,10 +74,12 @@ public class BemDAOJavaDb implements CadastroBemDAO {
             ResultSet result = stmt.executeQuery("SELECT * FROM BENS");
             List<Bem> listaBens = new ArrayList<Bem>();
             while (result.next()) {
+                int bemId = Integer.parseInt(result.getString("BEM_ID"));
+                int loteId = Integer.parseInt(result.getString("LOTE_ID_foreign_key"));
                 String descricao = result.getString("DESCRICAO");
                 String detalhes = result.getString("DETALHES");
                 String categoria = result.getString("CATEGORIA");
-                Bem bem = new Bem(descricao, detalhes, categoria);
+                Bem bem = new Bem(bemId, loteId, descricao, detalhes, categoria);
                 listaBens.add(bem);
             }
             return listaBens;
@@ -118,10 +98,11 @@ public class BemDAOJavaDb implements CadastroBemDAO {
             Bem bem = null;
             if (resultado.next()) {
                 int bem_Id = Integer.parseInt(resultado.getString("BEM_ID"));
+                int loteId = Integer.parseInt(resultado.getString("LOTE_ID_foreign_key"));
                 String descricao = resultado.getString("DESCRICAO");
                 String detalhes = resultado.getString("DETALHES");
                 String categoria = resultado.getString("CATEGORIA");
-                bem = new Bem(bem_Id, descricao, detalhes, categoria);
+                bem = new Bem(bem_Id, loteId, descricao, detalhes, categoria);
             }
             return bem;
         } catch (SQLException ex) {

@@ -43,13 +43,13 @@ public class CadastroUsuarioController {
         return false;
     }
 
-    public List<String> getTodos() throws DAOException {
-        List<String> lista = new ArrayList<String>();
+    public List<Usuario> getTodos() throws DAOException {
+        List<Usuario> lista = new ArrayList<Usuario>();
         for (Usuario usuario : facade.buscarTodosPF()) {
-            lista.add(usuario.getNome());
+            lista.add(usuario);
         }
         for (Usuario usuario: facade.buscarTodosPJ()) {
-            lista.add(usuario.getNome());
+            lista.add(usuario);
         }
         return lista;
     }   

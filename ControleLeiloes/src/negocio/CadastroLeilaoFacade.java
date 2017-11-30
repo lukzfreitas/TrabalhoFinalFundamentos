@@ -56,8 +56,8 @@ public class CadastroLeilaoFacade {
         }
     }
 
-    public Lance darLance(int leilaoId, String usuarioId, String lanceData, double valor) throws DAOException {
-        Lance lance = new Lance(leilaoId, usuarioId, lanceData, valor);
+    public Lance darLance(int leilaoId, String usuarioId, double valor) throws DAOException {
+        Lance lance = new Lance(leilaoId, usuarioId, valor);
         try {
             boolean retorno = dao.darLance(lance);
             if (retorno) {
