@@ -13,8 +13,8 @@ import java.util.List;
  * @author Lucas
  */
 public interface CadastroLanceDAO {
-    boolean adicionar(Lance lance) throws DAOException;
+    boolean adicionar(Lance lance) throws DAOException;    
     List<Lance> getTodos() throws DAOException;
     List<Lance> getLancesPorLeilaoID(int leilaoId) throws DAOException;    
-    List<Lance> getLancesPorUsuarioID(String usuarioId) throws DAOException;
+    List<Lance> getLancesPorUsuarioID(String usuarioId) throws DAOException;    
 }

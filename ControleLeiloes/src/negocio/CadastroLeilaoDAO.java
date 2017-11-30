@@ -17,7 +17,7 @@ public interface CadastroLeilaoDAO {
     boolean adicionar(Leilao leilao) throws DAOException;
     List<Leilao> getTodos() throws DAOException, ParseException;    
     boolean darLance(Lance lance) throws DAOException;
-//    boolean encerrarLeilao(int id) throws DAOException;
+    boolean encerrarLeilao(int leilaoId) throws DAOException;
     List<Leilao> getAtivos() throws DAOException;
     List<Leilao> getEncerrados() throws DAOException;
     List<Leilao> getTipoOferta() throws DAOException, ParseException;

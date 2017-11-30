@@ -47,6 +47,14 @@ public class CadastroLeilaoFacade {
             throw new DAOException("Falha ao adicionar leilão!", e);
         }
     }
+    
+    public boolean encerrarLeilao(int leilaoId) throws DAOException {
+        try {
+            return dao.encerrarLeilao(leilaoId);            
+        } catch (DAOException e) {
+            throw new DAOException("Falha ao encerrar leilão!", e);
+        }
+    }
 
     public List<Leilao> getTodos() throws DAOException, ParseException {
         try {

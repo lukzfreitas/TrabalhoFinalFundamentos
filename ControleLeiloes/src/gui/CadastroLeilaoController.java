@@ -22,8 +22,7 @@ import negocio.Leilao;
 public class CadastroLeilaoController {
 
     private CadastroLeilaoFacade facade;
-    private ListaLeilaoModel listaLeilaoModel;
-    private ListaLanceModel listaLanceModel;
+    private ListaLeilaoModel listaLeilaoModel;    
 
     public CadastroLeilaoController() throws DAOException, ParseException {
         facade = new CadastroLeilaoFacade();
@@ -61,19 +60,10 @@ public class CadastroLeilaoController {
             lista.add(leilao.toString());
         }
         return lista;
-    }
-
-    public boolean darLance(
-            int leilaoId,
-            String usuarioId,            
-            double valor
-    ) throws DAOException {
-        Lance lance = facade.darLance(leilaoId, usuarioId, valor);
-        if (lance != null) {
-            listaLanceModel.add(lance);
-            return true;
-        }
-        return false;
+    }    
+    
+    public boolean encerrarLeilao(int leilaoId) throws DAOException {
+        return facade.encerrarLeilao(leilaoId);
     }
 
     public List<Leilao> getAtivos() throws DAOException {

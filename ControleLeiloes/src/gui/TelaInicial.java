@@ -11,8 +11,6 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
@@ -267,7 +265,17 @@ public class TelaInicial extends javax.swing.JFrame {
     private void encerrarLeilaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encerrarLeilaoActionPerformed
         int index = leiloesEmAndamento.getSelectedIndex();
         ListaLeilaoModel model = (ListaLeilaoModel) leiloesEmAndamento.getModel();
-        System.out.println();
+        int leilaoId = model.getElementAt(index).getLeilaoId();
+        CadastroLeilaoController leilaoController;
+        try {
+            leilaoController = new CadastroLeilaoController();
+            leilaoController.encerrarLeilao(leilaoId);
+        } catch (DAOException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_encerrarLeilaoActionPerformed
 
     private void cadastrarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarLanceActionPerformed
@@ -311,7 +319,7 @@ public class TelaInicial extends javax.swing.JFrame {
         CadastroLanceController lanceController;
         try {
             lanceController = new CadastroLanceController();
-            ListaLanceModel lanceModel = new ListaLanceModel(lanceController.getLancesPorUsuarioID(usuarioId));            
+            ListaLanceModel lanceModel = new ListaLanceModel(lanceController.getLancesPorUsuarioID(usuarioId));
             lancesDeUsuario.setModel(lanceModel);
         } catch (DAOException ex) {
             Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);

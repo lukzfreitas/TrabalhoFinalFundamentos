@@ -303,13 +303,13 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
     @Override
     public List<Leilao> getLanceFechado() throws DAOException, ParseException {
         try {
-        	Connection con = getConnection();
+            Connection con = getConnection();
             PreparedStatement stmt = con.prepareStatement("SELECT * FROM LEILOES WHERE TIPO_LANCE=?");
             stmt.setString(1, "FECHADO");
             ResultSet resultado = stmt.executeQuery();
             List<Leilao> listaLeiloesLanceFechado = new ArrayList<Leilao>();
-            while(resultado.next()) {
-            	int leilaoId = Integer.parseInt(resultado.getString("LEILAO_ID"));
+            while (resultado.next()) {
+                int leilaoId = Integer.parseInt(resultado.getString("LEILAO_ID"));
                 int loteId = Integer.parseInt(resultado.getString("LOTE_ID_LEILAO_foreign_key"));
                 String dataIni = resultado.getString("DATA_INICIO");
                 String dataFim = resultado.getString("DATA_FIM");
@@ -317,21 +317,41 @@ public class LeilaoDAOJavaDb implements CadastroLeilaoDAO {
                 String vencedor = resultado.getString("VENCEDOR");
                 String tipo_leilao = resultado.getString("TIPO");
                 String tipo_lance = resultado.getString("TIPO_LANCE");
-                
+
                 Leilao leilao = new Leilao(leilaoId, loteId, arremate, vencedor, tipo_lance, tipo_lance, dataIni, dataFim);
-                
-                String data_hora_lance=dataFim;
-                d_temp=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(data_hora_lance);
-                if(agora.before(d_temp)){
-                	leilao.ativa();
-                }else leilao.desativa();
-                
+
+                String data_hora_lance = dataFim;
+                d_temp = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").parse(data_hora_lance);
+                if (agora.before(d_temp)) {
+                    leilao.ativa();
+                } else {
+                    leilao.desativa();
+                }
+
                 listaLeiloesLanceFechado.add(leilao);
-                
+
             }
             return listaLeiloesLanceFechado;
         } catch (SQLException ex) {
             throw new DAOException("Falha ao buscar.", ex);
+        }
+    }
+
+    @Override
+    public boolean encerrarLeilao(int leilaoId) throws DAOException {
+        try {
+            Date agora = new Date(System.currentTimeMillis());
+            SimpleDateFormat formatarData = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+            String dataFormatada = formatarData.format(agora);
+            Connection con = getConnection();
+            PreparedStatement stmt = con.prepareStatement("UPDATE LEILOES SET DATA_FIM=? WHERE LEILAO_ID=?");
+            stmt.setString(1, dataFormatada);
+            stmt.setInt(2, leilaoId);
+            int ret = stmt.executeUpdate();
+            con.close();
+            return (ret > 0);
+        } catch (SQLException ex) {
+            throw new DAOException("Falha ao atualizar.", ex);
         }
     }
 
