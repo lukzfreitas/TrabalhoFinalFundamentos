@@ -49,13 +49,13 @@ public class CadastroBemController {
         return null;
     }
 
-    public List<String> getTodos() throws DAOException {
-        List<String> lista = new ArrayList<String>();
-        for (Bem bem : facade.buscarTodos()) {
-            lista.add(bem.toString());
-        }        
-        return lista;
+    public List<Bem> getTodos() throws DAOException {        
+        return facade.buscarTodos();            
     }
+    
+    public List<Bem> getBensPorLoteId(int loteId) throws DAOException {
+        return facade.buscarBensPorLoteId(loteId);
+    }    
     
     public Bem getBem(int bemId) throws DAOException {
         return facade.buscarBem(bemId);

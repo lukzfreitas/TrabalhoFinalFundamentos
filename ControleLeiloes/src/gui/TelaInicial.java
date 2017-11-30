@@ -12,6 +12,7 @@ import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import negocio.Leilao;
 
 /**
  *
@@ -53,36 +54,30 @@ public class TelaInicial extends javax.swing.JFrame {
         atualizarLeiloesAndamento = new javax.swing.JButton();
         atualizarLeiloesEncerrados = new javax.swing.JButton();
         atualizarUsuarios = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        lancesDeLeilao = new javax.swing.JList();
-        Lances = new javax.swing.JLabel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        lancesDeUsuario = new javax.swing.JList();
-        jLabel2 = new javax.swing.JLabel();
-        atualizarLancesLeilao = new javax.swing.JButton();
-        atualizarLancesUsuario = new javax.swing.JButton();
-        encerrarLance = new javax.swing.JButton();
+        verLancesLeilao = new javax.swing.JButton();
+        verBens = new javax.swing.JButton();
+        verLancesUsuario = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jScrollPane1.setViewportView(leiloesEmAndamento);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 92, 440, 220));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 670, 220));
 
         leilaoAndamento.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         leilaoAndamento.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         leilaoAndamento.setText("Leilões em andamento");
-        getContentPane().add(leilaoAndamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(8, 52, 440, -1));
+        getContentPane().add(leilaoAndamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 30, 440, -1));
 
         jScrollPane2.setViewportView(leiloesEncerrados);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 90, 430, 220));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, 670, 220));
 
         leilaoEncerrado.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         leilaoEncerrado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         leilaoEncerrado.setText("Leilões encerrados");
-        getContentPane().add(leilaoEncerrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 50, 430, -1));
+        getContentPane().add(leilaoEncerrado, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 370, 430, -1));
 
         cadastrarLeilao.setText("Cadastrar Leilão");
         cadastrarLeilao.addActionListener(new java.awt.event.ActionListener() {
@@ -90,7 +85,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 cadastrarLeilaoActionPerformed(evt);
             }
         });
-        getContentPane().add(cadastrarLeilao, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 350, 120, 40));
+        getContentPane().add(cadastrarLeilao, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, 120, 40));
 
         encerrarLeilao.setText("Encerrar Leilão");
         encerrarLeilao.addActionListener(new java.awt.event.ActionListener() {
@@ -98,7 +93,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 encerrarLeilaoActionPerformed(evt);
             }
         });
-        getContentPane().add(encerrarLeilao, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 120, 40));
+        getContentPane().add(encerrarLeilao, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 120, 40));
 
         cadastrarLance.setText("Dar Lance");
         cadastrarLance.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +101,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 cadastrarLanceActionPerformed(evt);
             }
         });
-        getContentPane().add(cadastrarLance, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 350, 120, 40));
+        getContentPane().add(cadastrarLance, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 300, 120, 40));
 
         popularBanco.setText("Popular Banco de Dados");
         popularBanco.addActionListener(new java.awt.event.ActionListener() {
@@ -114,16 +109,16 @@ public class TelaInicial extends javax.swing.JFrame {
                 popularBancoActionPerformed(evt);
             }
         });
-        getContentPane().add(popularBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+        getContentPane().add(popularBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 490, 180, 80));
 
         jScrollPane3.setViewportView(listaDeUsuario);
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 90, 420, 220));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 70, 610, 220));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Lista de Usuários");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 50, 420, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 420, -1));
 
         cadastrarUsuario.setText("Cadastrar Usuário");
         cadastrarUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -131,7 +126,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 cadastrarUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(cadastrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 350, -1, 40));
+        getContentPane().add(cadastrarUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 300, -1, 40));
 
         atualizarLeiloesAndamento.setText("Atualizar");
         atualizarLeiloesAndamento.addActionListener(new java.awt.event.ActionListener() {
@@ -139,7 +134,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 atualizarLeiloesAndamentoActionPerformed(evt);
             }
         });
-        getContentPane().add(atualizarLeiloesAndamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
+        getContentPane().add(atualizarLeiloesAndamento, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 300, -1, -1));
 
         atualizarLeiloesEncerrados.setText("Atualizar");
         atualizarLeiloesEncerrados.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +142,7 @@ public class TelaInicial extends javax.swing.JFrame {
                 atualizarLeiloesEncerradosActionPerformed(evt);
             }
         });
-        getContentPane().add(atualizarLeiloesEncerrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 320, -1, -1));
+        getContentPane().add(atualizarLeiloesEncerrados, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 640, -1, -1));
 
         atualizarUsuarios.setText("Atualizar");
         atualizarUsuarios.addActionListener(new java.awt.event.ActionListener() {
@@ -155,47 +150,31 @@ public class TelaInicial extends javax.swing.JFrame {
                 atualizarUsuariosActionPerformed(evt);
             }
         });
-        getContentPane().add(atualizarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 320, -1, -1));
+        getContentPane().add(atualizarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 300, -1, -1));
 
-        jScrollPane4.setViewportView(lancesDeLeilao);
-
-        getContentPane().add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 440, 530, 210));
-
-        Lances.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        Lances.setText("Lances do Leilão");
-        getContentPane().add(Lances, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, -1, -1));
-
-        jScrollPane5.setViewportView(lancesDeUsuario);
-
-        getContentPane().add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 440, 510, 210));
-
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Lances do Usuário");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 410, -1, -1));
-
-        atualizarLancesLeilao.setText("Atualizar");
-        atualizarLancesLeilao.addActionListener(new java.awt.event.ActionListener() {
+        verLancesLeilao.setText("Ver Lances");
+        verLancesLeilao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                atualizarLancesLeilaoActionPerformed(evt);
+                verLancesLeilaoActionPerformed(evt);
             }
         });
-        getContentPane().add(atualizarLancesLeilao, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 660, -1, -1));
+        getContentPane().add(verLancesLeilao, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 300, 110, 40));
 
-        atualizarLancesUsuario.setText("Atualizar");
-        atualizarLancesUsuario.addActionListener(new java.awt.event.ActionListener() {
+        verBens.setText("Ver Bens");
+        verBens.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                atualizarLancesUsuarioActionPerformed(evt);
+                verBensActionPerformed(evt);
             }
         });
-        getContentPane().add(atualizarLancesUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 660, -1, -1));
+        getContentPane().add(verBens, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, 110, 40));
 
-        encerrarLance.setText("Encerrar Lance");
-        encerrarLance.addActionListener(new java.awt.event.ActionListener() {
+        verLancesUsuario.setText("Ver Lances");
+        verLancesUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                encerrarLanceActionPerformed(evt);
+                verLancesUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(encerrarLance, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 660, -1, -1));
+        getContentPane().add(verLancesUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 300, 120, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -307,45 +286,54 @@ public class TelaInicial extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cadastrarLanceActionPerformed
 
-    private void atualizarLancesLeilaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarLancesLeilaoActionPerformed
+    private void verLancesLeilaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verLancesLeilaoActionPerformed
         int index = leiloesEmAndamento.getSelectedIndex();
         ListaLeilaoModel leilaoModel = (ListaLeilaoModel) leiloesEmAndamento.getModel();
         int leilaoId = leilaoModel.getElementAt(index).getLeilaoId();
-        CadastroLanceController lanceController;
+        TelaLancesLeilao telaLancesLeilao = new TelaLancesLeilao();
         try {
-            lanceController = new CadastroLanceController();
+            CadastroLanceController lanceController = new CadastroLanceController();
             ListaLanceModel lanceModel = new ListaLanceModel(lanceController.getLancesPorLeilaoID(leilaoId));
-            lancesDeLeilao.setModel(lanceModel);
+            telaLancesLeilao.listaLancesLeilao.setModel(lanceModel);
+            telaLancesLeilao.setVisible(true);
         } catch (DAOException ex) {
             Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_atualizarLancesLeilaoActionPerformed
+    }//GEN-LAST:event_verLancesLeilaoActionPerformed
 
-    private void atualizarLancesUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarLancesUsuarioActionPerformed
+    private void verBensActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verBensActionPerformed
+        int index = leiloesEmAndamento.getSelectedIndex();
+        ListaLeilaoModel leilaoModel = (ListaLeilaoModel) leiloesEmAndamento.getModel();
+        int leilaoId = leilaoModel.getElementAt(index).getLeilaoId();
+        try {
+            CadastroBemController bemController = new CadastroBemController();
+            System.out.println(bemController.getBensPorLoteId(leilaoId));
+            ListaBemModel bemModel = new ListaBemModel(bemController.getBensPorLoteId(leilaoId));
+            TelaBensLeilao telaBensLeilao = new TelaBensLeilao();
+            telaBensLeilao.listaBensLeilao.setModel(bemModel);
+            telaBensLeilao.setVisible(true);
+        } catch (DAOException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_verBensActionPerformed
+
+    private void verLancesUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verLancesUsuarioActionPerformed
         int index = listaDeUsuario.getSelectedIndex();
         ListaUsuariosModel usuariosModel = (ListaUsuariosModel) listaDeUsuario.getModel();
         String usuarioId = usuariosModel.getCpfOuCnpjSelecionado(index);
-        CadastroLanceController lanceController;
+        CadastroLanceController lanceController;        
         try {
             lanceController = new CadastroLanceController();
             ListaLanceModel lanceModel = new ListaLanceModel(lanceController.getLancesPorUsuarioID(usuarioId));
-            lancesDeUsuario.setModel(lanceModel);
+            TelaLancesUsuario telaLancesUsuario = new TelaLancesUsuario();
+            telaLancesUsuario.listaLancesUsuario.setModel(lanceModel);
+            telaLancesUsuario.setVisible(true);
         } catch (DAOException ex) {
             Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_atualizarLancesUsuarioActionPerformed
-
-    private void encerrarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encerrarLanceActionPerformed
-        int index = lancesDeUsuario.getSelectedIndex();        
-        ListaLanceModel lanceModel = (ListaLanceModel) lancesDeUsuario.getModel();        
-        int lanceId = lanceModel.getElementAt(index).getLanceId();
-        try {
-            CadastroLanceController lanceController = new CadastroLanceController();
-            lanceController.cancelarLance(lanceId);
-        } catch (DAOException ex) {
-            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_encerrarLanceActionPerformed
+        
+        
+    }//GEN-LAST:event_verLancesUsuarioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -383,31 +371,25 @@ public class TelaInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Lances;
-    private javax.swing.JButton atualizarLancesLeilao;
-    private javax.swing.JButton atualizarLancesUsuario;
     private javax.swing.JButton atualizarLeiloesAndamento;
     private javax.swing.JButton atualizarLeiloesEncerrados;
     private javax.swing.JButton atualizarUsuarios;
     private javax.swing.JButton cadastrarLance;
     private javax.swing.JButton cadastrarLeilao;
     private javax.swing.JButton cadastrarUsuario;
-    private javax.swing.JButton encerrarLance;
     private javax.swing.JButton encerrarLeilao;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JList lancesDeLeilao;
-    private javax.swing.JList lancesDeUsuario;
     private javax.swing.JLabel leilaoAndamento;
     private javax.swing.JLabel leilaoEncerrado;
     private javax.swing.JList leiloesEmAndamento;
     private javax.swing.JList leiloesEncerrados;
     private javax.swing.JList listaDeUsuario;
     private javax.swing.JButton popularBanco;
+    private javax.swing.JButton verBens;
+    private javax.swing.JButton verLancesLeilao;
+    private javax.swing.JButton verLancesUsuario;
     // End of variables declaration//GEN-END:variables
 }

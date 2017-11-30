@@ -15,5 +15,7 @@ import java.util.List;
 public interface CadastroBemDAO {
     boolean adicionar(Bem bemId) throws DAOException;
     List<Bem> getTodos() throws DAOException;
+    List<Bem> getBensPorLoteId(int loteId) throws DAOException;
     Bem getBem(int bemId) throws DAOException;
+    
 }

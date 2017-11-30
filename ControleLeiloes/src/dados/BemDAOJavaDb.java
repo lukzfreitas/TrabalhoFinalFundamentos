@@ -43,6 +43,7 @@ public class BemDAOJavaDb implements CadastroBemDAO {
         return DriverManager.getConnection("jdbc:derby:DB_Leiloes");
     }
 
+    @Override
     public boolean adicionar(Bem bem) throws DAOException {
         try {
             Connection con = getConnection();
@@ -105,6 +106,28 @@ public class BemDAOJavaDb implements CadastroBemDAO {
                 bem = new Bem(bem_Id, loteId, descricao, detalhes, categoria);
             }
             return bem;
+        } catch (SQLException ex) {
+            throw new DAOException("Falha ao buscar.", ex);
+        }
+    }
+
+    @Override
+    public List<Bem> getBensPorLoteId(int loteId) throws DAOException {
+        try {
+            Connection con = getConnection();
+            PreparedStatement stmt = con.prepareStatement("SELECT * FROM BENS WHERE LOTE_ID_foreign_key=?");
+            stmt.setInt(1, loteId);
+            ResultSet resultado = stmt.executeQuery();
+            List<Bem> listaBens = new ArrayList<Bem>();
+            while (resultado.next()) {
+                int bem_Id = Integer.parseInt(resultado.getString("BEM_ID"));                
+                String descricao = resultado.getString("DESCRICAO");
+                String detalhes = resultado.getString("DETALHES");
+                String categoria = resultado.getString("CATEGORIA");
+                Bem bem = new Bem(bem_Id, loteId, descricao, detalhes, categoria);
+                listaBens.add(bem);
+            }
+            return listaBens;
         } catch (SQLException ex) {
             throw new DAOException("Falha ao buscar.", ex);
         }

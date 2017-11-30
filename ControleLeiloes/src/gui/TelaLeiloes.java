@@ -188,13 +188,13 @@ public class TelaLeiloes extends javax.swing.JFrame {
     private javax.swing.JButton AdicionarBem;
     private javax.swing.JButton CadastrarLote;
     private javax.swing.JButton cadastrar;
-    private javax.swing.JTextField categoria_bemTextField;
+    public javax.swing.JTextField categoria_bemTextField;
     private javax.swing.JLabel dataFimLabel;
-    private javax.swing.JTextField dataFimTextField;
+    public javax.swing.JTextField dataFimTextField;
     private javax.swing.JLabel dataInicioLabel;
-    private javax.swing.JTextField dataInicioTextField;
-    private javax.swing.JTextField descricao_bemTextField;
-    private javax.swing.JTextField detalhes_bemTextField;
+    public javax.swing.JTextField dataInicioTextField;
+    public javax.swing.JTextField descricao_bemTextField;
+    public javax.swing.JTextField detalhes_bemTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -204,11 +204,11 @@ public class TelaLeiloes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList listaDeBens;
+    public javax.swing.JList listaDeBens;
     private javax.swing.JLabel tipoLabel;
-    private javax.swing.JTextField tipoLanceTextField;
-    private javax.swing.JTextField tipoTextField;
-    private javax.swing.JTextField valorDoLote;
+    public javax.swing.JTextField tipoLanceTextField;
+    public javax.swing.JTextField tipoTextField;
+    public javax.swing.JTextField valorDoLote;
     // End of variables declaration//GEN-END:variables
     private int loteId;
     private DefaultListModel model = new DefaultListModel();

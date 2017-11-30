@@ -53,6 +53,14 @@ public class CadastroBemFacade {
         }
     }
     
+    public List<Bem> buscarBensPorLoteId(int loteId) throws DAOException {
+        try {
+            return dao.getBensPorLoteId(loteId);
+        } catch (DAOException e) {
+            throw new DAOException("Falha ao buscar bens", e);
+        }
+    }
+    
     public Bem buscarBem(int bemId) throws DAOException {
         try {
             return dao.getBem(bemId);
