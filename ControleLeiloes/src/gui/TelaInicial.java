@@ -61,6 +61,7 @@ public class TelaInicial extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         atualizarLancesLeilao = new javax.swing.JButton();
         atualizarLancesUsuario = new javax.swing.JButton();
+        encerrarLance = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -187,6 +188,14 @@ public class TelaInicial extends javax.swing.JFrame {
             }
         });
         getContentPane().add(atualizarLancesUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 660, -1, -1));
+
+        encerrarLance.setText("Encerrar Lance");
+        encerrarLance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                encerrarLanceActionPerformed(evt);
+            }
+        });
+        getContentPane().add(encerrarLance, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 660, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -326,6 +335,18 @@ public class TelaInicial extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_atualizarLancesUsuarioActionPerformed
 
+    private void encerrarLanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encerrarLanceActionPerformed
+        int index = lancesDeUsuario.getSelectedIndex();        
+        ListaLanceModel lanceModel = (ListaLanceModel) lancesDeUsuario.getModel();        
+        int lanceId = lanceModel.getElementAt(index).getLanceId();
+        try {
+            CadastroLanceController lanceController = new CadastroLanceController();
+            lanceController.cancelarLance(lanceId);
+        } catch (DAOException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_encerrarLanceActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -371,6 +392,7 @@ public class TelaInicial extends javax.swing.JFrame {
     private javax.swing.JButton cadastrarLance;
     private javax.swing.JButton cadastrarLeilao;
     private javax.swing.JButton cadastrarUsuario;
+    private javax.swing.JButton encerrarLance;
     private javax.swing.JButton encerrarLeilao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -46,6 +46,10 @@ public class CadastroLanceController {
         return false;
     }
     
+    public boolean cancelarLance(int lanceId) throws DAOException {
+        return facade.cancelarLance(lanceId);
+    }
+    
     public List<Lance> getTodos() throws DAOException{
         List<Lance> lista = new ArrayList<Lance>();
         for (Lance lance : facade.getTodos()) {

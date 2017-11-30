@@ -41,6 +41,14 @@ public class CadastroLanceFacade {
             throw new DAOException("Falha ao adicionar lance!", e);
         }
     }
+    
+    public boolean cancelarLance(int lanceId) throws DAOException {
+        try {
+            return dao.cancelarLance(lanceId);
+        } catch (DAOException e) {
+            throw new DAOException("Falha ao cancelar lance!", e);
+        }
+    }
 
     public List<Lance> getTodos() throws DAOException {
         try {

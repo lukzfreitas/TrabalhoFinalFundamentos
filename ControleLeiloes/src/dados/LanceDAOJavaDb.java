@@ -68,6 +68,20 @@ public class LanceDAOJavaDb implements CadastroLanceDAO {
     }
 
     @Override
+    public boolean cancelarLance(int lanceId) throws DAOException {
+        try {
+            Connection con = getConnection();
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM LANCES WHERE LANCE_ID=?");
+            stmt.setInt(1, lanceId);
+            int ret = stmt.executeUpdate();
+            con.close();
+            return (ret > 0);
+        } catch (SQLException ex) {
+            throw new DAOException("Falha ao remover.", ex);
+        }
+    }
+
+    @Override
     public List<Lance> getLancesPorLeilaoID(int leilaoId) throws DAOException {
         try {
             Connection con = getConnection();
