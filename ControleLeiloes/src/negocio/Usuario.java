@@ -7,7 +7,7 @@ package negocio;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public abstract class Usuario {    
     private String nome;

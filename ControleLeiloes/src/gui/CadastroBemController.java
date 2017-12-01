@@ -15,7 +15,7 @@ import negocio.UsuarioPF;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class CadastroBemController {
 

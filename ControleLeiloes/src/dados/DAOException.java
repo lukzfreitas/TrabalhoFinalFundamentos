@@ -7,7 +7,7 @@ package dados;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class DAOException extends Exception{
 

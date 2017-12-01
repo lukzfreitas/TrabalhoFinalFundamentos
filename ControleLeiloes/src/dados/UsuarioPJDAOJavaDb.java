@@ -21,7 +21,7 @@ import negocio.UsuarioPJ;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class UsuarioPJDAOJavaDb implements CadastroUsuarioPJDAO {
 

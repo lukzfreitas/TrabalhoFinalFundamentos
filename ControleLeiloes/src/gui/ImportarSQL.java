@@ -18,7 +18,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class ImportarSQL {
 

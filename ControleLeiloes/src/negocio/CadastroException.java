@@ -7,7 +7,7 @@ package negocio;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class CadastroException extends Exception{
      

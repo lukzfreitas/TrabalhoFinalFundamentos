@@ -8,10 +8,11 @@ package gui;
 import dados.DAOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class TelaUsuarios extends javax.swing.JFrame {
 
@@ -20,6 +21,7 @@ public class TelaUsuarios extends javax.swing.JFrame {
      */
     public TelaUsuarios() {
         initComponents();
+        cpfCnpjTextField.setText("612.632.268-17");
     }
 
     /**
@@ -118,19 +120,24 @@ public class TelaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_nomeTextFieldActionPerformed
 
     private void cadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarUsuarioActionPerformed
-        String id = cpfCnpjTextField.getText();
-        String nome = nomeTextField.getText();
-        String email = emailTextField.getText();
-        CadastroUsuarioController usuarioController;
-        try {
-            usuarioController = new CadastroUsuarioController();
-            usuarioController.adicionarUsuario(id, nome, email);
-        } catch (DAOException ex) {
-            Logger.getLogger(TelaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-        }        
+        if (cpfCnpjTextField.getText().isEmpty() || nomeTextField.getText().isEmpty()
+                || emailTextField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campos vazios!");
+        } else {
+            String id = cpfCnpjTextField.getText();
+            String nome = nomeTextField.getText();
+            String email = emailTextField.getText();
+            CadastroUsuarioController usuarioController;
+            try {
+                usuarioController = new CadastroUsuarioController();
+                usuarioController.adicionarUsuario(id, nome, email);
+                dispose();
+            } catch (DAOException ex) {
+                Logger.getLogger(TelaUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_cadastrarUsuarioActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cadastrarUsuario;

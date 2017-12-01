@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public interface CadastroBemDAO {
     boolean adicionar(Bem bemId) throws DAOException;

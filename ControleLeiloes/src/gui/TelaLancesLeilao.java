@@ -7,7 +7,7 @@ package gui;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class TelaLancesLeilao extends javax.swing.JFrame {
 

@@ -18,7 +18,7 @@ import negocio.CadastroBemDAO;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class BemDAOJavaDb implements CadastroBemDAO {
 

@@ -13,7 +13,7 @@ import negocio.Lance;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class CadastroLanceController {
     

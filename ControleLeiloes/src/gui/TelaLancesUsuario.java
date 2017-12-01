@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class TelaLancesUsuario extends javax.swing.JFrame {
 

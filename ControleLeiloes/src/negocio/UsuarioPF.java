@@ -7,7 +7,7 @@ package negocio;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class UsuarioPF extends Usuario{
     private String cpf;   

@@ -13,7 +13,7 @@ import negocio.Usuario;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class ListaBemModel extends AbstractListModel<Bem>{
 

@@ -7,26 +7,32 @@ package gui;
 
 import dados.DAOException;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
 import negocio.Bem;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class TelaLeiloes extends javax.swing.JFrame {
 
     /**
      * Creates new form TelaUsuario
      */
-    public TelaLeiloes() {
+    public TelaLeiloes() throws ParseException {
         initComponents();
         descricao_bemTextField.setEditable(false);
         detalhes_bemTextField.setEditable(false);
         categoria_bemTextField.setEditable(false);
+        dataInicioTextField.setText("2017-10-24 10:30:00");
+        dataFimTextField.setText("2018-02-12 18:30:00");
     }
 
     /**
@@ -151,12 +157,14 @@ public class TelaLeiloes extends javax.swing.JFrame {
 
     private void cadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarActionPerformed
 
-        if (!tipoTextField.getText().isEmpty()
-                || !dataInicioTextField.getText().isEmpty()
-                || !dataFimTextField.getText().isEmpty()
-                || !tipoLanceTextField.getText().isEmpty()
-                || !valorMinimo.getText().isEmpty()
-                || listaDeBens.getModel().getSize() > 0) {
+        if (tipoTextField.getText().isEmpty()
+                || dataInicioTextField.getText().isEmpty()
+                || dataFimTextField.getText().isEmpty()
+                || tipoLanceTextField.getText().isEmpty()
+                || valorMinimo.getText().isEmpty()
+                || listaDeBens.getModel().getSize() < 1) {
+            JOptionPane.showMessageDialog(null, "Campos vazios!");
+        } else {
             String tipo = tipoTextField.getText();
             String dataInicio = dataInicioTextField.getText();
             String dataFim = dataFimTextField.getText();
@@ -171,8 +179,6 @@ public class TelaLeiloes extends javax.swing.JFrame {
             } catch (ParseException ex) {
                 Logger.getLogger(TelaLeiloes.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Campos vazios!");
         }
 
 

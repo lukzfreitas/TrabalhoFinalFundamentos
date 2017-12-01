@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class TelaInicial extends javax.swing.JFrame {
 
@@ -179,7 +179,11 @@ public class TelaInicial extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cadastrarLeilaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarLeilaoActionPerformed
-        new TelaLeiloes().setVisible(true);
+        try {
+            new TelaLeiloes().setVisible(true);
+        } catch (ParseException ex) {
+            Logger.getLogger(TelaInicial.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cadastrarLeilaoActionPerformed
 
     private void popularBancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_popularBancoActionPerformed

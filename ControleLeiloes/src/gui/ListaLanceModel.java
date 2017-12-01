@@ -12,7 +12,7 @@ import negocio.Lance;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class ListaLanceModel extends AbstractListModel<Lance>{
 

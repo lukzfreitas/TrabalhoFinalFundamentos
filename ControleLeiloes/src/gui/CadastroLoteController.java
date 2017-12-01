@@ -13,7 +13,7 @@ import negocio.Lote;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class CadastroLoteController {
     

@@ -18,7 +18,7 @@ import negocio.Lote;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class LoteDAOJavaDb implements CadastroLoteDAO {
     

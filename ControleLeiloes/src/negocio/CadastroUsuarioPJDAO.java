@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public interface CadastroUsuarioPJDAO {
     boolean adicionarPJ(UsuarioPJ usuarioPJ) throws DAOException;    

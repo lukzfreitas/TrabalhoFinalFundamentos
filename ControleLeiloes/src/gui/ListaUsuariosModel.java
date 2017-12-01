@@ -14,7 +14,7 @@ import negocio.UsuarioPJ;
 
 /**
  *
- * @author Lucas
+ * @author Camila e Lucas
  */
 public class ListaUsuariosModel extends AbstractListModel<Usuario>{
     
